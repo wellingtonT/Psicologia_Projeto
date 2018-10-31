@@ -80,7 +80,7 @@ public class LoginView extends JPanel {
 		
 	}
 	
-	public JPanel getLoginPanel() {
+	public JPanel getView() {
 		return this;
 	}
 }

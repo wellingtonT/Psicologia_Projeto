@@ -12,7 +12,8 @@ public class ClasseTeste extends JFrame {
 	private JPanel content;
     private Template template;
     private LoginView conteudoLogin;
-    private InitialView conteudoInicio;;
+    private InitialView conteudoInicio;
+    private RegisterView conteudoRegistro;
 	
 	public ClasseTeste() {
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); //Abrir na tela cheia
@@ -20,9 +21,12 @@ public class ClasseTeste extends JFrame {
 		this.setTitle("Clínica Amaranto");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
+		
 		template = new Template(2);
 		conteudoLogin = new LoginView();
 		conteudoInicio = new InitialView();
+		conteudoRegistro = new RegisterView(1);
+		
 		setPane();
 		addComponent();	
 	}
@@ -34,8 +38,8 @@ public class ClasseTeste extends JFrame {
 	}
 	
 	private void addComponent() {
-		content.add(template.getNorthPanel(), BorderLayout.NORTH);
-		content.add(conteudoInicio.getInitialPanel(), BorderLayout.CENTER);
+		content.add(template.getView(), BorderLayout.NORTH);
+		content.add(conteudoRegistro.getView(), BorderLayout.CENTER);
 	}
 	
 }

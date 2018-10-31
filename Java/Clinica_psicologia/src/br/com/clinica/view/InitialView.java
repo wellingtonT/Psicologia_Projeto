@@ -55,16 +55,19 @@ public class InitialView extends JPanel{
 		
 		redimensionarImagem(modifyPeopleButton, imgModificarPessoas);
 		this.add(modifyPeopleButton, gbc);
+		setActionButton(modifyPeopleButton, 2);
 		
 		gbc.gridx = 2;
 		
 		redimensionarImagem(registerQueryButton, imgConsultas);
 		this.add(registerQueryButton, gbc);
+		setActionButton(registerQueryButton, 3);
 		
 		gbc.gridx = 3;
 		
 		redimensionarImagem(modifyQueryButton, imgModificarConsultas);
 		this.add(modifyQueryButton, gbc);
+		setActionButton(modifyQueryButton, 4);
 		
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -101,7 +104,7 @@ public class InitialView extends JPanel{
 		
 	}
 	
-	public JPanel getInitialPanel() {
+	public JPanel getView() {
 		return this;
 	}
 	

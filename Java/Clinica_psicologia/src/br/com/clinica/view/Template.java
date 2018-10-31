@@ -63,7 +63,7 @@ public class Template extends JPanel {
 		
 	}
 
-	public JPanel getNorthPanel() {
+	public JPanel getView() {
 		return this;
 	}
 	
