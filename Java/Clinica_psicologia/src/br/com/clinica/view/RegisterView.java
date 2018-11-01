@@ -12,7 +12,11 @@ import javax.swing.JPanel;
 
 public class RegisterView extends JPanel{
 	
+	private int opt;
+	
 	private GridBagConstraints gbc = new GridBagConstraints();
+	
+	private JLabel breadcrumb = new JLabel("Início > Cadastro de Pessoas");
 	
 	private String caminho = "/br/com/clinica/imagens/";
 	
@@ -28,13 +32,14 @@ public class RegisterView extends JPanel{
 	private JLabel registerSecretaryText = new JLabel("Registrar Secretária");
 	
 	private JLabel rodape = new JLabel(" ");
-	private JLabel breadcrumb = new JLabel("Início > Cadastro de Pessoas");
+	
 	
 	public RegisterView(int opt) {
-		addComponents(opt);
+		this.opt = opt;
+		addComponents();
 	}
 	
-	public void addComponents(int opt) {
+	public void addComponents() {
 		this.setLayout(new GridBagLayout());
 		
 		gbc.gridx = 0;

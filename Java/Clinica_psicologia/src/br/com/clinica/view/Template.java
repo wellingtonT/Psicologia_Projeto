@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 
 public class Template extends JPanel {
 	
+	private int opt;
+	
 	private GridBagConstraints gbc;
 	
 	private JButton exitButton;
@@ -23,11 +25,14 @@ public class Template extends JPanel {
 	private JLabel imagem = new JLabel(img);
 	
 	public Template(int opt) {
+		
+		this.opt = opt;
+		
 		this.setPreferredSize(new Dimension(0,125));
-		addNorthComponents(opt);
+		addNorthComponents();
 	}
 	
-	private  void addNorthComponents(int opt) {
+	private  void addNorthComponents() {
 		this.setLayout(new GridBagLayout());
 		gbc = new GridBagConstraints();
 

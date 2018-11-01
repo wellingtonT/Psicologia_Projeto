@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 
 public class ModifyView extends JPanel{
 	
+	private int opt;
+	
 	private GridBagConstraints gbc = new GridBagConstraints();
 	
 	private String caminho = "/br/com/clinica/imagens/";
@@ -31,10 +33,11 @@ public class ModifyView extends JPanel{
 	private JLabel breadcrumb = new JLabel("Início > Moficiar Pessoas");
 	
 	public ModifyView(int opt) {
-		addComponents(opt);
+		this.opt = opt;
+		addComponents();
 	}
 	
-	public void addComponents(int opt) {
+	public void addComponents() {
 		this.setLayout(new GridBagLayout());
 		
 		gbc.gridx = 0;
