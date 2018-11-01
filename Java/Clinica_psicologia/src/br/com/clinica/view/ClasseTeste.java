@@ -14,6 +14,8 @@ public class ClasseTeste extends JFrame {
     private LoginView conteudoLogin;
     private InitialView conteudoInicio;
     private RegisterView conteudoRegistro;
+    private ModifyView conteudoModificar;
+    private RegisterQuery conteudoRegistroConsulta;
 	
 	public ClasseTeste() {
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); //Abrir na tela cheia
@@ -25,7 +27,9 @@ public class ClasseTeste extends JFrame {
 		template = new Template(2);
 		conteudoLogin = new LoginView();
 		conteudoInicio = new InitialView();
-		conteudoRegistro = new RegisterView(1);
+		conteudoRegistro = new RegisterView(3);
+		conteudoModificar = new ModifyView(3);
+		conteudoRegistroConsulta = new RegisterQuery();
 		
 		setPane();
 		addComponent();	
@@ -39,7 +43,7 @@ public class ClasseTeste extends JFrame {
 	
 	private void addComponent() {
 		content.add(template.getView(), BorderLayout.NORTH);
-		content.add(conteudoRegistro.getView(), BorderLayout.CENTER);
+		content.add(conteudoRegistroConsulta.getView(), BorderLayout.CENTER);
 	}
 	
 }

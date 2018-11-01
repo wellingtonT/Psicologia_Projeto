@@ -16,19 +16,21 @@ public class InitialView extends JPanel{
 	
 	private GridBagConstraints gbc = new GridBagConstraints();
 	
-	private ImageIcon imgPessoas = new ImageIcon(getClass().getResource("Pessoas.png"));
+	private String caminho = "/br/com/clinica/imagens/";
+	
+	private ImageIcon imgPessoas = new ImageIcon(getClass().getResource(caminho + "Pessoas.png"));
 	private JLabel registerPeopleButton = new JLabel(imgPessoas);
 	private JLabel registerPeopleText = new JLabel("Registrar Pessoas");
 	
-	private ImageIcon imgModificarPessoas = new ImageIcon(getClass().getResource("Modificar_Pessoas.png"));
+	private ImageIcon imgModificarPessoas = new ImageIcon(getClass().getResource(caminho + "Modificar_Pessoas.png"));
 	private JLabel modifyPeopleButton = new JLabel(imgModificarPessoas);
 	private JLabel modifyPeopleText = new JLabel("Modificar Pessoas");
 	
-	private ImageIcon imgConsultas = new ImageIcon(getClass().getResource("Consultas.png"));
+	private ImageIcon imgConsultas = new ImageIcon(getClass().getResource(caminho + "Consultas.png"));
 	private JLabel registerQueryButton = new JLabel(imgConsultas);
 	private JLabel registerQueryText = new JLabel("Registrar Consultas");
 	
-	private ImageIcon imgModificarConsultas = new ImageIcon(getClass().getResource("Modificar_Consultas.png"));
+	private ImageIcon imgModificarConsultas = new ImageIcon(getClass().getResource(caminho + "Modificar_Consultas.png"));
 	private JLabel modifyQueryButton = new JLabel(imgModificarConsultas);
 	private JLabel modifyQueryText = new JLabel("Modificar Consultas");
 	

@@ -10,27 +10,27 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class RegisterView extends JPanel{
+public class ModifyView extends JPanel{
 	
 	private GridBagConstraints gbc = new GridBagConstraints();
 	
 	private String caminho = "/br/com/clinica/imagens/";
 	
-	private ImageIcon imgPessoas = new ImageIcon(getClass().getResource(caminho + "Pessoas.png"));
+	private ImageIcon imgPessoas = new ImageIcon(getClass().getResource(caminho + "Modificar_Pessoas.png"));
 
 	private JLabel registerPatient = new JLabel(imgPessoas);
-	private JLabel registerPatientText = new JLabel("Registrar Paciente");
+	private JLabel registerPatientText = new JLabel("Modificar Paciente");
 	
 	private JLabel registerPsycologist = new JLabel(imgPessoas);
-	private JLabel registerPsycologistText = new JLabel("Registar Psicólogo");
+	private JLabel registerPsycologistText = new JLabel("Modificar Psicólogo");
 	
 	private JLabel registerSecretary = new JLabel(imgPessoas);
-	private JLabel registerSecretaryText = new JLabel("Registrar Secretária");
+	private JLabel registerSecretaryText = new JLabel("Modificar Secretária");
 	
 	private JLabel rodape = new JLabel(" ");
-	private JLabel breadcrumb = new JLabel("Início > Cadastro de Pessoas");
+	private JLabel breadcrumb = new JLabel("Início > Moficiar Pessoas");
 	
-	public RegisterView(int opt) {
+	public ModifyView(int opt) {
 		addComponents(opt);
 	}
 	

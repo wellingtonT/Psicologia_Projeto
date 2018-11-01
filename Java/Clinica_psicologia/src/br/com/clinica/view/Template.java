@@ -14,9 +14,13 @@ import javax.swing.JPanel;
 
 public class Template extends JPanel {
 	
-	private GridBagConstraints gbc = new GridBagConstraints();
+	private GridBagConstraints gbc;
+	
 	private JButton exitButton;
 	private JLabel userName;
+	
+	private ImageIcon img = new ImageIcon(getClass().getResource("/br/com/clinica/imagens/Logo.png"));
+	private JLabel imagem = new JLabel(img);
 	
 	public Template(int opt) {
 		this.setPreferredSize(new Dimension(0,125));
@@ -25,17 +29,14 @@ public class Template extends JPanel {
 	
 	private  void addNorthComponents(int opt) {
 		this.setLayout(new GridBagLayout());
-		
-		
-		
-		ImageIcon img = new ImageIcon(getClass().getResource("Logo.png"));
-		JLabel imagem = new JLabel(img);
+		gbc = new GridBagConstraints();
 
-		imagem.setIcon(new ImageIcon(img.getImage().getScaledInstance(300,105, Image.SCALE_DEFAULT)));
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.weightx = 1.0;
 		gbc.anchor = GridBagConstraints.LINE_START;
+		
+		redimensionarImagem(imagem, img);
 		this.add(imagem, gbc);	
 		
 		exitButton = new JButton("Sair");
@@ -65,6 +66,10 @@ public class Template extends JPanel {
 
 	public JPanel getView() {
 		return this;
+	}
+	
+	private void redimensionarImagem(JLabel img1, ImageIcon img2) {
+		img1.setIcon(new ImageIcon(img2.getImage().getScaledInstance(260,100, Image.SCALE_DEFAULT)));
 	}
 	
 	private void addExitButton() {
