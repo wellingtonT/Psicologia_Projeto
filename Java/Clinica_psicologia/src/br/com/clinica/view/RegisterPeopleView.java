@@ -13,7 +13,9 @@ import javax.swing.JTextField;
 
 public class RegisterPeopleView extends JPanel{
 	
-	private int opt;
+	private int registerType;
+	private int modelo;
+	private String caminho;
 	
 	private GridBagConstraints gbc;
 	
@@ -32,7 +34,7 @@ public class RegisterPeopleView extends JPanel{
 	private JTextField cityField = new JTextField(20);
 	
 	private JLabel phoneText = new JLabel("Telefone: ");
-	private JTextField phoneField = new JTextField(20);
+	private JTextField phoneField = new JTextField(10);
 	
 	private JLabel medicationText1 = new JLabel("Medicamento: ");
 	private JLabel medicationText2 = new JLabel("Medicamento: ");
@@ -56,8 +58,9 @@ public class RegisterPeopleView extends JPanel{
 	private JButton cancelButton = new JButton("Cancelar");
 	private JButton saveButton = new JButton("Salvar");
 	
-	public RegisterPeopleView(int opt) {
-		this.opt = opt;
+	public RegisterPeopleView(int tipo, int modelo) {
+		this.registerType = tipo;
+		this.modelo = modelo;
 		addComponents();
 	}
 	
@@ -72,17 +75,22 @@ public class RegisterPeopleView extends JPanel{
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.weightx = 1.0;
-		gbc.weighty = 0.1;
 		gbc.insets = new Insets(1,10,1,1);
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.anchor = GridBagConstraints.PAGE_START;
 		
-		switch(opt) {
-			case 1: breadcrumb.setText("Início > Cadastrar Paciente");
+		switch(modelo) {
+			case 1: caminho = "Modificar";
 					break;
-			case 2: breadcrumb.setText("Início > Cadastrar Psicólogo");
+			default: caminho = "Cadastrar";
+		}
+		
+		switch(registerType) {
+			case 1: breadcrumb.setText("Início > " + caminho + " Pessoa > " + caminho + " Paciente");
 					break;
-			case 3: breadcrumb.setText("Início > Cadastrar Secretária");
+			case 2: breadcrumb.setText("Início > " + caminho + " Pessoa > " + caminho + " Psicólogo");
+					break;
+			case 3: breadcrumb.setText("Início > " + caminho + " Pessoa > " + caminho + " Secretária");
 					break;
 			default: System.out.println("Erro ao mudar breadcrumb");
 		}
@@ -90,7 +98,7 @@ public class RegisterPeopleView extends JPanel{
 		this.add(breadcrumb,gbc);
 		
 		gbc.insets = new Insets(1,1,1,1);
-		gbc.anchor = GridBagConstraints.CENTER;
+		gbc.anchor = GridBagConstraints.PAGE_END;
 		gbc.gridy = 1;
 		gbc.weighty = 0.9;
 		
@@ -98,22 +106,26 @@ public class RegisterPeopleView extends JPanel{
 		addComponentsPersonalData(personalData);
 		this.add(personalData,gbc);
 		
+		gbc.anchor = GridBagConstraints.PAGE_START;
 		gbc.gridy = 2;
 		
 		JPanel addressData = new JPanel();
 		addComponentsAddressData(addressData);
 		this.add(addressData, gbc);
 		
-		gbc.gridy = 3;
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		gbc.anchor = GridBagConstraints.PAGE_END;
 		
 		JPanel contactData = new JPanel();
 		addComponentsContactData(contactData);
 		this.add(contactData, gbc);
 		
 		gbc.gridx = 1;
-		gbc.gridy = 1;
+		gbc.gridy = 2;
+		gbc.anchor = GridBagConstraints.PAGE_START;
 		
-		switch(opt) {
+		switch(registerType) {
 			case 1:	
 				gbc.gridwidth = 2;
 				JPanel medicationData = new JPanel();
@@ -146,20 +158,23 @@ public class RegisterPeopleView extends JPanel{
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.insets = new Insets(10,15,10,15);
-		gbc.weightx = 1.0;
+		gbc.weightx = 0.1;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		
 		panel.add(nameText, gbc);
 		
-		gbc.gridx = 1;
-		
-		panel.add(nameField, gbc);
-		
-		gbc.gridx = 0;
 		gbc.gridy = 1;
 		
 		panel.add(cpfText,gbc);
+	
+		gbc.weightx = 0.9;
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		
+		panel.add(nameField, gbc);
+		
+		gbc.gridy = 1;
 		
 		gbc.gridx = 1;
 		
@@ -175,22 +190,23 @@ public class RegisterPeopleView extends JPanel{
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.insets = new Insets(10,15,10,15);
-		gbc.weightx = 1.0;
+		gbc.weightx = 0.1;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		
 		panel.add(streetText, gbc);
 		
-		gbc.gridx = 1;
-		
-		panel.add(streetField, gbc);
-		
-		gbc.gridx = 0;
 		gbc.gridy = 1;
 		
 		panel.add(cityText,gbc);
-		
+	
+		gbc.weightx = 0.9;
 		gbc.gridx = 1;
+		gbc.gridy = 0;
+		
+		panel.add(streetField, gbc);
+		
+		gbc.gridy = 1;
 
 		panel.add(cityField,gbc);
 	}
@@ -203,13 +219,14 @@ public class RegisterPeopleView extends JPanel{
 		
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		gbc.insets = new Insets(10,15,10,15);
-		gbc.weightx = 1.0;
+		gbc.insets = new Insets(25,15,25,15);
+		gbc.weightx = 0.1;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		
 		panel.add(phoneText, gbc);
 		
+		gbc.weightx = 0.9;
 		gbc.gridx = 1;
 		
 		panel.add(phoneField, gbc);
@@ -223,43 +240,47 @@ public class RegisterPeopleView extends JPanel{
 		
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		gbc.insets = new Insets(5,15,5,15);
-		gbc.weightx = 1.0;
+		gbc.insets = new Insets(10,15,10,15);
+		gbc.weightx = 0.1;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		
 		panel.add(medicationText1, gbc);
 		
-		gbc.gridx = 1;
-		
-		panel.add(medicationField1, gbc);
-		
-		gbc.gridx = 0;
 		gbc.gridy = 1;
-		
-		panel.add(dosageText1,gbc);
-		
-		gbc.gridx = 1;
-
-		panel.add(dosageField1,gbc);
-		
-		gbc.gridx = 0;
-		gbc.gridy = 2;
 		
 		panel.add(medicationText2,gbc);
 		
 		gbc.gridx = 1;
-
+		gbc.gridy = 0;
+		gbc.weightx = 0.9;
+		
+		panel.add(medicationField1, gbc);
+		
+		gbc.gridy = 1;
+		
 		panel.add(medicationField2,gbc);
 		
-		gbc.gridx = 0;
-		gbc.gridy = 3;
+		gbc.gridx = 3;
+		gbc.gridy = 0;
+		gbc.weightx = 0.1;
+		
+		panel.add(dosageText1,gbc);
+		
+		gbc.gridy = 1;
 		
 		panel.add(dosageText2,gbc);
 		
-		gbc.gridx = 1;
-
+		gbc.gridx = 4;
+		gbc.gridy = 0;
+		gbc.weightx = 0.9;
+		
+		panel.add(dosageField1,gbc);
+		
+		gbc.gridy = 1;
+		
 		panel.add(dosageField2,gbc);
+		
 	}
 	
 	public void addComponentsSecretaryData(JPanel panel) {
@@ -281,7 +302,7 @@ public class RegisterPeopleView extends JPanel{
 		
 		panel.add(salaryField, gbc);
 		
-		if(opt == 3) {
+		if(registerType == 3) {
 			gbc.gridx = 0;
 			gbc.gridy = 1;
 			

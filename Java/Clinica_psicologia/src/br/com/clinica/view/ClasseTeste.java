@@ -31,7 +31,7 @@ public class ClasseTeste extends JFrame {
 		conteudoRegistro = new RegisterView(3);
 		conteudoModificar = new ModifyView(3);
 		conteudoRegistroConsulta = new RegisterQueryView(1);
-		conteudoRegistroPessoa = new RegisterPeopleView(1);
+		conteudoRegistroPessoa = new RegisterPeopleView(1,2);
 		
 		setPane();
 		addComponent();	
@@ -45,7 +45,7 @@ public class ClasseTeste extends JFrame {
 	
 	private void addComponent() {
 		content.add(template.getView(), BorderLayout.NORTH);
-		content.add(conteudoRegistroPessoa.getView(), BorderLayout.CENTER);
+		content.add(conteudoInicio.getView(), BorderLayout.CENTER);
 	}
 	
 }
