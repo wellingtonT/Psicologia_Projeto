@@ -1,12 +1,15 @@
 package br.com.clinica.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,13 +21,18 @@ public class LoginView extends JPanel {
 	
 	private JLabel texto;
 	
-	private JLabel login; 
-	private JLabel cpfLabel;
-	private JLabel passwordLabel;
-	private JTextField cpfText;
-	private JPasswordField passwordText;
-	private JButton enterButton;
-	private JLabel theEnd;
+	private String caminho = "/br/com/clinica/imagens/";
+	
+	private JLabel login = new JLabel("LOGIN");
+	private JLabel cpfLabel = new JLabel("CPF: ");
+	private JLabel passwordLabel = new JLabel("Senha: ");
+	private JTextField cpfText = new JTextField();
+	private JPasswordField passwordText = new JPasswordField();
+	
+	private ImageIcon imgEnter = new ImageIcon(getClass().getResource(caminho + "Entrar.png"));
+	private JButton enterButton = new JButton(imgEnter);
+	
+	private JLabel theEnd = new JLabel(" ");
 	
 	private GridBagConstraints gbc;
 	
@@ -36,14 +44,6 @@ public class LoginView extends JPanel {
 	private void addComponent() {	
 		this.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
-        
-        login = new JLabel("LOGIN");
-        cpfLabel = new JLabel("CPF: ");
-        passwordLabel = new JLabel("Senha: ");
-        cpfText = new JTextField();
-        passwordText = new JPasswordField();
-        enterButton = new JButton("Entrar");
-        theEnd = new JLabel(" ");
         
         gbc.weighty = 0.4;
         gbc.gridx = 0;
@@ -85,8 +85,9 @@ public class LoginView extends JPanel {
         gbc.gridy = 3;
         gbc.fill = new GridBagConstraints().NONE;
         gbc.anchor = GridBagConstraints.LINE_START;
-        gbc.insets = new Insets(1,75,1,1);
+        gbc.insets = new Insets(50,35,1,1);
         
+        redimensionarImagem(enterButton, imgEnter);
         this.add(enterButton,gbc);
         
         gbc.weighty = 0.4;
@@ -98,5 +99,11 @@ public class LoginView extends JPanel {
 	
 	public JPanel getView() {
 		return this;
+	}
+	
+	private void redimensionarImagem(JButton img1, ImageIcon img2) {
+		img1.setIcon(new ImageIcon(img2.getImage().getScaledInstance(335, 375, Image.SCALE_DEFAULT)));
+		img1.setPreferredSize(new Dimension(149,45));
+		img1.setBackground(Color.lightGray);
 	}
 }

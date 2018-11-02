@@ -16,11 +16,15 @@ public class Template extends JPanel {
 	
 	private GridBagConstraints gbc;
 	
-	private JButton exitButton;
+	private String caminho = "/br/com/clinica/imagens/";
+	
+	private ImageIcon imgExit = new ImageIcon(getClass().getResource(caminho + "Sair.png"));
+	private JButton exitButton = new JButton(imgExit);
+	
 	private JLabel userName;
 	
-	private ImageIcon img = new ImageIcon(getClass().getResource("/br/com/clinica/imagens/Logo.png"));
-	private JLabel imagem = new JLabel(img);
+	private ImageIcon imgLogo = new ImageIcon(getClass().getResource(caminho + "Logo.png"));
+	private JLabel logo = new JLabel(imgLogo);
 	
 	public Template(int opt) {
 		this.setPreferredSize(new Dimension(0,125));
@@ -36,18 +40,8 @@ public class Template extends JPanel {
 		gbc.weightx = 1.0;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		
-		redimensionarImagem(imagem, img);
-		this.add(imagem, gbc);	
-		
-		exitButton = new JButton("Sair");
-		exitButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// IMPLEMENTAR!!
-				
-			}
-		});
+		redimensionarImagem(logo, imgLogo);
+		this.add(logo, gbc);	
 		
 		switch(opt) {
 			case 1: this.remove(exitButton);
@@ -68,8 +62,13 @@ public class Template extends JPanel {
 		return this;
 	}
 	
+	private void redimensionarImagem(JButton img1, ImageIcon img2) {
+		img1.setIcon(new ImageIcon(img2.getImage().getScaledInstance(200, 190, Image.SCALE_DEFAULT)));
+		img1.setPreferredSize(new Dimension(70,20));
+	}
+	
 	private void redimensionarImagem(JLabel img1, ImageIcon img2) {
-		img1.setIcon(new ImageIcon(img2.getImage().getScaledInstance(260,100, Image.SCALE_DEFAULT)));
+		img1.setIcon(new ImageIcon(img2.getImage().getScaledInstance(260, 100, Image.SCALE_DEFAULT)));
 	}
 	
 	private void addExitButton() {
@@ -77,6 +76,7 @@ public class Template extends JPanel {
 		gbc.gridx = 1;
 		gbc.anchor = GridBagConstraints.LAST_LINE_END;
 		
+		redimensionarImagem(exitButton,imgExit);
 		this.add(exitButton, gbc);
 	}
 	

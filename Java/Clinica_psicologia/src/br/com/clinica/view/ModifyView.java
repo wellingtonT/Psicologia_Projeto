@@ -1,5 +1,6 @@
 package br.com.clinica.view;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -7,6 +8,7 @@ import java.awt.Image;
 import java.awt.Insets;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -18,13 +20,13 @@ public class ModifyView extends JPanel{
 	
 	private ImageIcon imgPessoas = new ImageIcon(getClass().getResource(caminho + "Modificar_Pessoas.png"));
 
-	private JLabel registerPatient = new JLabel(imgPessoas);
+	private JButton registerPatient = new JButton(imgPessoas);
 	private JLabel registerPatientText = new JLabel("Modificar Paciente");
 	
-	private JLabel registerPsycologist = new JLabel(imgPessoas);
+	private JButton registerPsycologist = new JButton(imgPessoas);
 	private JLabel registerPsycologistText = new JLabel("Modificar Psicólogo");
 	
-	private JLabel registerSecretary = new JLabel(imgPessoas);
+	private JButton registerSecretary = new JButton(imgPessoas);
 	private JLabel registerSecretaryText = new JLabel("Modificar Secretária");
 	
 	private JLabel rodape = new JLabel(" ");
@@ -49,6 +51,8 @@ public class ModifyView extends JPanel{
 		gbc.gridwidth = 1;
 		gbc.gridy = 1;
 		gbc.gridx = 0;
+		gbc.weighty = 0.3;
+		
 		gbc.anchor = GridBagConstraints.CENTER;
 		
 		redimensionarImagem(registerPatient, imgPessoas);
@@ -93,8 +97,9 @@ public class ModifyView extends JPanel{
 		this.add(rodape, gbc);
 	}
 	
-	private void redimensionarImagem(JLabel img1, ImageIcon img2) {
-		img1.setIcon(new ImageIcon(img2.getImage().getScaledInstance(300,300, Image.SCALE_DEFAULT)));
+	private void redimensionarImagem(JButton img1, ImageIcon img2) {
+		img1.setIcon(new ImageIcon(img2.getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT)));
+		img1.setPreferredSize(new Dimension(180,130));
 	}
 	
 	private void setFont(JLabel text) {

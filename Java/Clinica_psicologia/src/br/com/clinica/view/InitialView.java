@@ -1,5 +1,6 @@
 package br.com.clinica.view;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -19,19 +21,19 @@ public class InitialView extends JPanel{
 	private String caminho = "/br/com/clinica/imagens/";
 	
 	private ImageIcon imgPessoas = new ImageIcon(getClass().getResource(caminho + "Pessoas.png"));
-	private JLabel registerPeopleButton = new JLabel(imgPessoas);
+	private JButton registerPeopleButton = new JButton(imgPessoas);
 	private JLabel registerPeopleText = new JLabel("Registrar Pessoas");
 	
 	private ImageIcon imgModificarPessoas = new ImageIcon(getClass().getResource(caminho + "Modificar_Pessoas.png"));
-	private JLabel modifyPeopleButton = new JLabel(imgModificarPessoas);
+	private JButton modifyPeopleButton = new JButton(imgModificarPessoas);
 	private JLabel modifyPeopleText = new JLabel("Modificar Pessoas");
 	
 	private ImageIcon imgConsultas = new ImageIcon(getClass().getResource(caminho + "Consultas.png"));
-	private JLabel registerQueryButton = new JLabel(imgConsultas);
+	private JButton registerQueryButton = new JButton(imgConsultas);
 	private JLabel registerQueryText = new JLabel("Registrar Consultas");
 	
 	private ImageIcon imgModificarConsultas = new ImageIcon(getClass().getResource(caminho + "Modificar_Consultas.png"));
-	private JLabel modifyQueryButton = new JLabel(imgModificarConsultas);
+	private JButton modifyQueryButton = new JButton(imgModificarConsultas);
 	private JLabel modifyQueryText = new JLabel("Modificar Consultas");
 	
 	private JLabel rodape = new JLabel(" ");
@@ -47,6 +49,7 @@ public class InitialView extends JPanel{
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.weightx = 1.0;
+		gbc.weighty = 0.3;
 		gbc.anchor = GridBagConstraints.PAGE_END;
 		
 		redimensionarImagem(registerPeopleButton, imgPessoas);
@@ -72,10 +75,10 @@ public class InitialView extends JPanel{
 		setActionButton(modifyQueryButton, 4);
 		
 		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridheight = 2;
-		gbc.insets = new Insets(1, 1, 60, 1);
-		gbc.anchor = GridBagConstraints.PAGE_END;
+		gbc.gridy = 1;
+		gbc.gridheight = 1;
+		gbc.insets = new Insets(1, 1, 72, 1);
+		gbc.anchor = GridBagConstraints.PAGE_START;
 		
 		setFont(registerPeopleText);
 		this.add(registerPeopleText, gbc);
@@ -110,15 +113,16 @@ public class InitialView extends JPanel{
 		return this;
 	}
 	
-	private void redimensionarImagem(JLabel img1, ImageIcon img2) {
-		img1.setIcon(new ImageIcon(img2.getImage().getScaledInstance(300,300, Image.SCALE_DEFAULT)));
+	private void redimensionarImagem(JButton img1, ImageIcon img2) {
+		img1.setIcon(new ImageIcon(img2.getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT)));
+		img1.setPreferredSize(new Dimension(180,130));
 	}
 	
 	private void setFont(JLabel text) {
 		text.setFont(new Font("Georgia", Font.ROMAN_BASELINE, 20));
 	}
 	
-	private void setActionButton(JLabel button, int opt) {
+	private void setActionButton(JButton button, int opt) {
 		switch(opt) {
 			case 1: 
 				setActionRegisterPeople(button);
@@ -137,43 +141,19 @@ public class InitialView extends JPanel{
 		}
 	}
 	
-	private void setActionRegisterPeople(JLabel button) {
-		button.addMouseListener(new MouseAdapter() {
-			
-			public void mouseClicked(MouseEvent e) {
-				//IMPLEMENTAR
-			}
-			
-		});
+	private void setActionRegisterPeople(JButton button) {
+		//BOTÃO REGISTRAR PESSOAS
 	}
 	
-	private void setActionModifyPeople(JLabel button) {
-		button.addMouseListener(new MouseAdapter() {
-			
-			public void mouseClicked(MouseEvent e) {
-				//IMPLEMENTAR
-			}
-			
-		});
+	private void setActionModifyPeople(JButton button) {
+		//BOTÃO MODIFICAR PESSOAS
 	}
 	
-	private void setActionRegisterQuery(JLabel button) {
-		button.addMouseListener(new MouseAdapter() {
-			
-			public void mouseClicked(MouseEvent e) {
-				//IMPLEMENTAR
-			}
-			
-		});
+	private void setActionRegisterQuery(JButton button) {
+		//BOTÃO REGISTRAR CONSULTAS
 	}
 	
-	private void setActionModifyQuery(JLabel button) {
-		button.addMouseListener(new MouseAdapter() {
-			
-			public void mouseClicked(MouseEvent e) {
-				//IMPLEMENTAR
-			}
-			
-		});
+	private void setActionModifyQuery(JButton button) {
+		//BOTÃO MODIFICAR CONSULTAS
 	}
 }
