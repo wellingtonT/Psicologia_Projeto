@@ -45,7 +45,7 @@ public class ClasseTeste extends JFrame {
 	
 	private void addComponent() {
 		content.add(template.getView(), BorderLayout.NORTH);
-		content.add(conteudoPessoa.getView(), BorderLayout.CENTER);
+		content.add(conteudoRegistroConsulta.getView(), BorderLayout.CENTER);
 	}
 	
 }

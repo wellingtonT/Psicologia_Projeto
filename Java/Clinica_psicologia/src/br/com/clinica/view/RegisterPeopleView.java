@@ -17,9 +17,9 @@ public class RegisterPeopleView extends JPanel{
 	private int registerType;
 	private int modelo;
 	
-	private GridBagConstraints gbc;
-	
 	private String caminho = "/br/com/clinica/imagens/";
+	
+	private GridBagConstraints gbc;
 	
 	private JLabel breadcrumb = new JLabel();
 	
@@ -55,7 +55,7 @@ public class RegisterPeopleView extends JPanel{
 	
 	private JLabel crpText = new JLabel("CRP: ");
 	private JTextField crpField = new JTextField(5);
-	
+
 	private ImageIcon imgClear = new ImageIcon(getClass().getResource(caminho + "Limpar.png"));
 	private JButton clearButton = new JButton(imgClear);
 	
@@ -64,6 +64,7 @@ public class RegisterPeopleView extends JPanel{
 	
 	private ImageIcon imgSave = new ImageIcon(getClass().getResource(caminho + "Salvar.png"));
 	private JButton saveButton = new JButton(imgSave);
+
 	
 	public RegisterPeopleView(int tipo, int modelo) {
 		this.registerType = tipo;
@@ -226,6 +227,7 @@ public class RegisterPeopleView extends JPanel{
 		
 		gbc.gridx = 0;
 		gbc.gridy = 0;
+
 		gbc.insets = new Insets(30,15,30,15);
 		gbc.weightx = 0.1;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -298,7 +300,9 @@ public class RegisterPeopleView extends JPanel{
 		
 		gbc.gridx = 0;
 		gbc.gridy = 0;
+
 		gbc.insets = new Insets(30,15,30,15);
+
 		gbc.weightx = 1.0;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.anchor = GridBagConstraints.LINE_START;
@@ -311,7 +315,7 @@ public class RegisterPeopleView extends JPanel{
 		
 		if(registerType == 3) {
 			gbc.insets = new Insets(0,15,5,15);
-			
+
 			gbc.gridx = 0;
 			gbc.gridy = 1;
 			
@@ -343,6 +347,7 @@ public class RegisterPeopleView extends JPanel{
 		gbc.gridx = 2;
 		
 		redimensionarImagem(saveButton, imgSave);
+
 		panel.add(saveButton, gbc);
 		
 	}
@@ -352,4 +357,5 @@ public class RegisterPeopleView extends JPanel{
 		img1.setPreferredSize(new Dimension(100,70));
 		img1.setMinimumSize(new Dimension(85,55));
 	}
+
 }

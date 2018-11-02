@@ -135,23 +135,22 @@ public class RegisterQueryView extends JPanel {
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.insets = new Insets(10,15,10,15);
-		gbc.weightx = 0.1;
+		gbc.weightx = 1.0;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		
 		panel.add(cpfText, gbc);
 		
+		gbc.gridx = 1;
+		
+		panel.add(cpfField, gbc);
+		
+		gbc.gridx = 0;
 		gbc.gridy = 1;
 		
 		panel.add(psycologistText,gbc);
 		
-		gbc.weightx = 0.9;
 		gbc.gridx = 1;
-		gbc.gridy = 0;
-		
-		panel.add(cpfField, gbc);
-		
-		gbc.gridy = 1;
 		
 		psycologistBox.setPreferredSize(new Dimension(222,20));
 		panel.add(psycologistBox,gbc);
@@ -160,7 +159,7 @@ public class RegisterQueryView extends JPanel {
 	}
 	
 	public void addComponentsDateData(JPanel panel) {
-		panel.setBorder(BorderFactory.createTitledBorder("Horário"));
+		panel.setBorder(BorderFactory.createTitledBorder("Dados pessoais"));
 		
 		panel.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -168,48 +167,41 @@ public class RegisterQueryView extends JPanel {
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.insets = new Insets(9,20,9,20);
-		gbc.weightx = 0.1;
+		gbc.weightx = 1.0;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		
 		panel.add(dayText, gbc);
 		
 		gbc.gridx = 1;
-		gbc.weightx = 0.9;
 		
 		dayField.setMinimumSize(new Dimension(50,20));
 		panel.add(dayField, gbc);
 		
 		gbc.gridx = 2;
-		gbc.weightx = 0.1;
 		
 		panel.add(monthText, gbc);
 		
 		gbc.gridx = 3;
-		gbc.weightx = 0.9;
 		
 		panel.add(monthBox, gbc);
 		
 		gbc.gridx = 4;
-		gbc.weightx = 0.1;
 		
 		panel.add(yearText, gbc);
 		
 		gbc.gridx = 5;
-		gbc.weightx = 0.9;
 		
 		yearField.setMinimumSize(new Dimension(50,20));
 		panel.add(yearField, gbc);
 		
 		gbc.gridx = 0;
 		gbc.gridy = 1;
-		gbc.weightx = 0.1;
 		
 		panel.add(hourText, gbc);
 		
 		gbc.gridx = 1;
 		gbc.gridwidth = 2;
-		gbc.weightx = 0.9;
 		
 		hourBox.setPreferredSize(new Dimension(150,20));
 		panel.add(hourBox, gbc);

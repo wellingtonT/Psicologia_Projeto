@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 
 public class Template extends JPanel {
 	
+	private int opt;
+	
 	private GridBagConstraints gbc;
 	
 	private String caminho = "/br/com/clinica/imagens/";
@@ -27,11 +29,14 @@ public class Template extends JPanel {
 	private JLabel logo = new JLabel(imgLogo);
 	
 	public Template(int opt) {
+		
+		this.opt = opt;
+		
 		this.setPreferredSize(new Dimension(0,125));
-		addNorthComponents(opt);
+		addNorthComponents();
 	}
 	
-	private  void addNorthComponents(int opt) {
+	private  void addNorthComponents() {
 		this.setLayout(new GridBagLayout());
 		gbc = new GridBagConstraints();
 
