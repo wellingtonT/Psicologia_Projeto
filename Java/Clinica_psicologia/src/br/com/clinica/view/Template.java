@@ -12,7 +12,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import br.com.clinica.listener.ExitButtonListener;
+
 public class Template extends JPanel {
+	
+	private ExitButtonListener listener;
 	
 	private int opt;
 	
@@ -23,17 +27,20 @@ public class Template extends JPanel {
 	private ImageIcon imgExit = new ImageIcon(getClass().getResource(caminho + "Sair.png"));
 	private JButton exitButton = new JButton(imgExit);
 	
-	private JLabel userName;
+	public JLabel userName = new JLabel();
 	
 	private ImageIcon imgLogo = new ImageIcon(getClass().getResource(caminho + "Logo.png"));
 	private JLabel logo = new JLabel(imgLogo);
 	
 	public Template(int opt) {
-		
 		this.opt = opt;
 		
 		this.setPreferredSize(new Dimension(0,125));
 		addNorthComponents();
+	}
+	
+	public void setListener(ExitButtonListener listener) {
+		this.listener = listener;
 	}
 	
 	private  void addNorthComponents() {
@@ -63,6 +70,10 @@ public class Template extends JPanel {
 		
 	}
 
+	public void setUserName(String userName) {
+		this.userName.setText(userName);
+	}
+	
 	public JPanel getView() {
 		return this;
 	}
@@ -87,9 +98,7 @@ public class Template extends JPanel {
 	
 	private void addUserName() {
 		gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-		
-		userName = new JLabel();
-		userName.setText("[Nome do usuário]");
+
 		this.add(userName, gbc);
 	}
 	

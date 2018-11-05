@@ -6,7 +6,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class ClasseTeste extends JFrame {
+public class Frame extends JFrame {
 	
 	
 	private JPanel content;
@@ -18,7 +18,7 @@ public class ClasseTeste extends JFrame {
     private RegisterQueryView conteudoRegistroConsulta;
     private RegisterPeopleView conteudoPessoa;
 	
-	public ClasseTeste() {
+	public Frame() {
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); //Abrir na tela cheia
 		this.setMinimumSize(new Dimension(900,500));
 		this.setTitle("Clínica Amaranto");

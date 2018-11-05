@@ -1,11 +1,11 @@
 package br.com.clinica.main;
 
-import br.com.clinica.view.ClasseTeste;
+import br.com.clinica.view.Frame;
 
 public class StartApp {
 	
 	public static void main(String[] args) {
-		ClasseTeste frame = new ClasseTeste();
+		Frame frame = new Frame();
 		
 		frame.setVisible(true);
 	}
