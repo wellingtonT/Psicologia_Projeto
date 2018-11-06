@@ -101,6 +101,13 @@ public class Template extends JPanel {
 		gbc.anchor = GridBagConstraints.LAST_LINE_END;
 		
 		redimensionarImagem(exitButton,imgExit);
+		exitButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listener.exit();				
+			}
+		});
 		this.add(exitButton, gbc);
 	}
 	

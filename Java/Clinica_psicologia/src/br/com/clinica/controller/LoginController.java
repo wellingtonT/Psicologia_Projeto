@@ -13,6 +13,7 @@ public class LoginController {
 	private InitialController initialController;
 		
 	public LoginController() {
+		frame = new Frame();
 		loginView = new LoginView();
 		template = new Template(1);
 				
@@ -28,7 +29,6 @@ public class LoginController {
 	}
 	
 	public void initApp() {
-		frame = new Frame();
 		frame.setTemplate(template);
 		frame.setConteudo(loginView);
 		frame.addComponent();
@@ -37,7 +37,6 @@ public class LoginController {
 	}
 	
 	public void enterButton() {
-		
 		initialController = new InitialController(frame);
 	}
 	

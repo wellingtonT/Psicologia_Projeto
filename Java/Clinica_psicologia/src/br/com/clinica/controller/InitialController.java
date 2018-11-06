@@ -4,8 +4,12 @@ import java.awt.Component;
 
 import javax.swing.SwingUtilities;
 
+import br.com.clinica.listener.InitialButtonsListener;
 import br.com.clinica.view.Frame;
 import br.com.clinica.view.InitialView;
+import br.com.clinica.view.ModifyView;
+import br.com.clinica.view.RegisterQueryView;
+import br.com.clinica.view.RegisterView;
 import br.com.clinica.view.Template;
 
 public class InitialController {
@@ -14,28 +18,57 @@ public class InitialController {
 	private Template template;
 	private Frame frame;
 	
+	private RegisterController registerController;
+	private ModifyController modifyController;
+	private RegisterQueryController registerQueryController;
+	
 	public InitialController(Frame frame) {
 		initialView = new InitialView();	
 		template = new Template(2);
 
-		
 		this.frame = frame;
 
 		mudarConteudo(initialView, template);
+		buttonDefinition(this.frame);
 		
 	}
 	
 	public void mudarConteudo(Component conteudo, Component template) {
 		frame.getConteudo().removeAll();
-		frame.getTemplate().removeAll();
+//		frame.getTemplate().removeAll();
 		
 		frame.getConteudo().add(conteudo);
-		frame.getTemplate().add(template); //<-- AQUI É O PROBLEMA
+//		frame.getTemplate().add(template); //<-- AQUI É O PROBLEMA
 		
 		frame.getConteudo().revalidate();
-		frame.getTemplate().revalidate();
+//		frame.getTemplate().revalidate();
 		
 		SwingUtilities.updateComponentTreeUI(frame);
+	}
+	
+	public void buttonDefinition(Frame frame) {
+		initialView.setListener(new InitialButtonsListener() {
+			
+			@Override
+			public void registerQueryButton() {
+				registerQueryController = new RegisterQueryController(frame, 1);
+			}
+			
+			@Override
+			public void registerPeopleButton() {
+				registerController = new RegisterController(frame,3);
+			}
+			
+			@Override
+			public void modifyQueryButton() {
+				registerQueryController = new RegisterQueryController(frame,2);
+			}
+			
+			@Override
+			public void modifyPeopleButton() {
+				modifyController = new ModifyController(frame,3);
+			}
+		});
 	}
 
 }

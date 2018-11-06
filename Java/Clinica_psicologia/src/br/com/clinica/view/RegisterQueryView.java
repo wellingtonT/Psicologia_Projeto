@@ -5,6 +5,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -16,11 +18,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import br.com.clinica.listener.SearchButtonListener;
+import br.com.clinica.listener.SelectButtonsListener;
+
 public class RegisterQueryView extends JPanel {
 	
 	private int opt;
 	
 	private GridBagConstraints gbc;
+	
+	private SelectButtonsListener listener;
+	private SearchButtonListener listenerSearch;
 	
 	private String caminho = "/br/com/clinica/imagens/";
 	
@@ -47,11 +55,6 @@ public class RegisterQueryView extends JPanel {
 	private String[] hours = {"10:00","11:00","12:00","14:00","15:00"};
 	private JComboBox hourBox = new JComboBox(hours);
 	
-	private String[] columnsNames;
-	private Object[][] rowData;
-	private JTable tableQuery;
-	private JScrollPane tableScroll;
-	
 	private ImageIcon imgClear = new ImageIcon(getClass().getResource(caminho + "Limpar.png"));
 	private JButton clearButton = new JButton(imgClear);
 	
@@ -60,6 +63,10 @@ public class RegisterQueryView extends JPanel {
 	
 	private ImageIcon imgSave = new ImageIcon(getClass().getResource(caminho + "Salvar.png"));
 	private JButton saveButton = new JButton(imgSave);
+	
+	private JLabel locationCpfText = new JLabel("Digite o cpf do paciente: ");
+	private JTextField locationField = new JTextField(10);
+	private JButton locationButton = new JButton("Pesquisar");
 	
 	public RegisterQueryView(int opt) {
 		this.opt = opt;
@@ -70,26 +77,32 @@ public class RegisterQueryView extends JPanel {
 		this.setLayout(new GridBagLayout());
 		gbc = new GridBagConstraints();
 		
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.weightx = 1.0;
-		gbc.weighty = 0.05;
-		gbc.insets = new Insets(1,10,1,1);
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.anchor = GridBagConstraints.PAGE_START;
-		
-		switch(opt) {
-			case 1: breadcrumb.setText("Início > Cadastrar Consulta");
-					break;
-			case 2: breadcrumb.setText("Início > Modificar Consulta");
-					break;
-			default: System.out.println("Erro ao mudar breadcrumb");
+		if(opt == 2) {			
+			gbc.gridx = 0;
+			gbc.gridy = 0;
+			gbc.weightx = 1.0;
+			gbc.insets = new Insets(1,10,1,1);
+			gbc.fill = GridBagConstraints.NONE;
+			gbc.anchor = GridBagConstraints.LINE_END;
+	
+			this.add(locationCpfText, gbc);
+			
+			gbc.gridx = 1;
+			gbc.fill = GridBagConstraints.HORIZONTAL;
+			
+			this.add(locationField, gbc);
+			
+			gbc.gridx = 2;
+			gbc.anchor = GridBagConstraints.LINE_START;
+			gbc.fill = GridBagConstraints.NONE;
+			
+			addActionSearchButton();
+			this.add(locationButton, gbc);
 		}
-		
-		this.add(breadcrumb,gbc);
 		
 		gbc.insets = new Insets(1,1,1,1);
 		gbc.gridy = 1;
+		gbc.gridx = 0;
 		gbc.weighty = 0.95;
 		
 		JPanel personalData = new JPanel();
@@ -102,24 +115,25 @@ public class RegisterQueryView extends JPanel {
 		addComponentsDateData(dateData);
 		this.add(dateData, gbc);
 		
-		gbc.gridx = 0;
-		gbc.gridy = 2;
-		gbc.gridwidth = 2;
-		gbc.fill = GridBagConstraints.VERTICAL;
-		
-		JPanel tableData = new JPanel();
-		addComponentsDataTable(tableData);
-		this.add(tableData,gbc);
-		
 		gbc.gridwidth = 1;
 		gbc.gridx = 1;
+		gbc.gridy = 2;
 		gbc.fill = GridBagConstraints.NONE;
 		gbc.anchor = GridBagConstraints.LAST_LINE_END;
+		gbc.insets = new Insets(1, 1, 1, 1);
 		
 		JPanel buttonsData = new JPanel();
 		addComponentsDataButtons(buttonsData);
 		this.add(buttonsData,gbc);
 		
+	}
+	
+	public void setListener(SelectButtonsListener listener) {
+		this.listener = listener;
+	}
+	
+	public void setListenerSearch(SearchButtonListener listener) {
+		this.listenerSearch = listener;
 	}
 	
 	public JPanel getView() {
@@ -159,7 +173,7 @@ public class RegisterQueryView extends JPanel {
 	}
 	
 	public void addComponentsDateData(JPanel panel) {
-		panel.setBorder(BorderFactory.createTitledBorder("Dados pessoais"));
+		panel.setBorder(BorderFactory.createTitledBorder("Horários"));
 		
 		panel.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -208,31 +222,6 @@ public class RegisterQueryView extends JPanel {
 		
 	}
 	
-	public void addComponentsDataTable(JPanel panel) {
-		panel.setBorder(BorderFactory.createTitledBorder("Relação de data"));
-		
-		panel.setLayout(new GridBagLayout());
-		GridBagConstraints gbc = new GridBagConstraints();
-		
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.weightx = 1.0;
-		gbc.weighty = 1.0;
-		gbc.anchor = GridBagConstraints.CENTER;
-		gbc.fill = GridBagConstraints.VERTICAL;
-		gbc.insets = new Insets(5,20,1,20);
-		
-		tableDataConfig();
-		
-		tableQuery = new JTable(rowData, columnsNames);
-		
-		tableScroll = new JScrollPane(tableQuery);
-		tableScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		tableScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		tableScroll.setMinimumSize(new Dimension(300,200));
-		panel.add(tableScroll,gbc);
-		
-	}
 	
 	public void addComponentsDataButtons(JPanel panel) {
 		
@@ -245,17 +234,20 @@ public class RegisterQueryView extends JPanel {
 		
 		if(opt == 1) {
 			redimensionarImagem(clearButton, imgClear);
+			addActionClearButton();
 			panel.add(clearButton, gbc);
 		}
 		
-		gbc.gridx = 1;
+		gbc.gridy = 1;
 		
 		redimensionarImagem(cancelButton, imgCancel);
+		addActionCancelButton();
 		panel.add(cancelButton,gbc);
 		
-		gbc.gridx = 2;
+		gbc.gridy = 2;
 		
 		redimensionarImagem(saveButton, imgSave);
+		addActionSaveButton();
 		panel.add(saveButton, gbc);
 		
 	}
@@ -266,10 +258,44 @@ public class RegisterQueryView extends JPanel {
 		img1.setMinimumSize(new Dimension(85,55));
 	}
 	
-	public void tableDataConfig() {
-		columnsNames = new String[]{"Data", "Hora", "Psicólogo"};
-		rowData = new Object[][] {
-			{"10/10/2010", "14:30", "Wellington"}
-		};
+	
+	public void addActionClearButton() {
+		clearButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listener.clean();
+			}
+		});
+	}
+	
+	public void addActionCancelButton() {
+		cancelButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listener.cancel();
+			}
+		});
+	}
+	
+	public void addActionSaveButton() {
+		saveButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listener.save();
+			}
+		});
+	}
+	
+	public void addActionSearchButton() {
+		locationButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listenerSearch.search();
+			}
+		});
 	}
 }

@@ -8,9 +8,11 @@ public class PatientDAO {
 
 	private ArrayList<PatientModel> patientData = new ArrayList<>(); 
 	
+	
 	public void save(PatientModel patient) {
 		patientData.add(patient);
 	}
+	
 	
 	public ArrayList<PatientModel> getAll(){
 		return patientData;

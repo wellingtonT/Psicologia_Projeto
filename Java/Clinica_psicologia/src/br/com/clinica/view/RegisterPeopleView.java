@@ -5,6 +5,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -13,9 +15,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import br.com.clinica.listener.RegisterPeopleButtonsListener;
+import br.com.clinica.listener.SearchButtonListener;
+import br.com.clinica.listener.SelectButtonsListener;
+
 public class RegisterPeopleView extends JPanel{
 	private int registerType;
 	private int modelo;
+	
+	private SelectButtonsListener listener;
+	private SearchButtonListener listenerSearch;
 	
 	private String caminho = "/br/com/clinica/imagens/";
 	
@@ -37,6 +46,10 @@ public class RegisterPeopleView extends JPanel{
 	
 	private JLabel phoneText = new JLabel("Telefone: ");
 	private JTextField phoneField = new JTextField(10);
+	
+	private JLabel locationCpfText = new JLabel("Digite o CPF: ");
+	private JTextField locationField = new JTextField(10);
+	private JButton locationButton = new JButton("Pesquisar");
 	
 	private JLabel medicationText1 = new JLabel("Medicamento: ");
 	private JLabel medicationText2 = new JLabel("Medicamento: ");
@@ -76,38 +89,46 @@ public class RegisterPeopleView extends JPanel{
 		return this;
 	}
 	
+	public void setListener(SelectButtonsListener listener) {
+		this.listener = listener;
+	}
+	
+	public void setListenerSearch(SearchButtonListener listener) {
+		this.listenerSearch = listener;
+	}
+	
 	public void addComponents() {
 		this.setLayout(new GridBagLayout());
 		gbc = new GridBagConstraints();
 		
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.weightx = 1.0;
-		gbc.insets = new Insets(1,10,1,1);
+		if(modelo == 1) {
+			gbc.gridx = 0;
+			gbc.gridy = 0;
+			gbc.weightx = 1.0;
+			gbc.insets = new Insets(1,10,1,1);
+			gbc.fill = GridBagConstraints.NONE;
+			gbc.anchor = GridBagConstraints.LINE_END;
+	
+			this.add(locationCpfText, gbc);
+			
+			gbc.gridx = 1;
+			gbc.fill = GridBagConstraints.HORIZONTAL;
+			
+			this.add(locationField, gbc);
+			
+			gbc.gridx = 2;
+			gbc.anchor = GridBagConstraints.LINE_START;
+			gbc.fill = GridBagConstraints.NONE;
+			
+			addActionSearchButton(locationButton);
+			this.add(locationButton, gbc);
+		}
+		
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.anchor = GridBagConstraints.PAGE_START;
-		
-		switch(modelo) {
-			case 1: caminho = "Modificar";
-					break;
-			default: caminho = "Cadastrar";
-		}
-		
-		switch(registerType) {
-			case 1: breadcrumb.setText("Início > " + caminho + " Pessoa > " + caminho + " Paciente");
-					break;
-			case 2: breadcrumb.setText("Início > " + caminho + " Pessoa > " + caminho + " Psicólogo");
-					break;
-			case 3: breadcrumb.setText("Início > " + caminho + " Pessoa > " + caminho + " Secretária");
-					break;
-			default: System.out.println("Erro ao mudar breadcrumb");
-		}
-		
-		this.add(breadcrumb,gbc);
-		
 		gbc.insets = new Insets(1,1,1,1);
-		gbc.anchor = GridBagConstraints.PAGE_END;
+		gbc.anchor = GridBagConstraints.PAGE_START;
 		gbc.gridy = 1;
+		gbc.gridx = 0;
 		gbc.weighty = 0.9;
 		
 		JPanel personalData = new JPanel();
@@ -123,6 +144,7 @@ public class RegisterPeopleView extends JPanel{
 		
 		gbc.gridx = 1;
 		gbc.gridy = 1;
+		gbc.gridwidth = 2;
 		gbc.anchor = GridBagConstraints.PAGE_END;
 		
 		JPanel contactData = new JPanel();
@@ -131,6 +153,7 @@ public class RegisterPeopleView extends JPanel{
 		
 		gbc.gridx = 1;
 		gbc.gridy = 2;
+		gbc.gridwidth = 1;
 		gbc.anchor = GridBagConstraints.PAGE_START;
 		
 		switch(registerType) {
@@ -337,17 +360,19 @@ public class RegisterPeopleView extends JPanel{
 		gbc.insets = new Insets(1,1,1,10);
 		
 		redimensionarImagem(clearButton,imgClear);
+		addActionClearButton();
 		panel.add(clearButton, gbc);
 		
 		gbc.gridx = 1;
 		
 		redimensionarImagem(cancelButton, imgCancel);
+		addActionCancelButton();
 		panel.add(cancelButton,gbc);
 		
 		gbc.gridx = 2;
 		
 		redimensionarImagem(saveButton, imgSave);
-
+		addActionSaveButton();
 		panel.add(saveButton, gbc);
 		
 	}
@@ -358,4 +383,50 @@ public class RegisterPeopleView extends JPanel{
 		img1.setMinimumSize(new Dimension(85,55));
 	}
 
+	public void addActionClearButton() {
+		clearButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listener.clean();
+			}
+		});
+	}
+	
+	public void addActionCancelButton() {
+		cancelButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listener.cancel();
+			}
+		});
+	}
+	
+	public void addActionSaveButton() {
+		saveButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listener.save();
+			}
+		});
+	}
+	
+	public void addActionSearchButton(JButton button) {
+		button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listenerSearch.search();				
+			}
+		});
+	}
+
+	public JTextField getNameField() {
+		return nameField;
+	}
+
+	
+	
 }

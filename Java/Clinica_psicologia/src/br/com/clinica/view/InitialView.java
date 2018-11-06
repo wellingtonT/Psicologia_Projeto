@@ -6,6 +6,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -14,11 +16,16 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import br.com.clinica.listener.EnterButtonListener;
+import br.com.clinica.listener.InitialButtonsListener;
+
 public class InitialView extends JPanel{
 	
 	private GridBagConstraints gbc = new GridBagConstraints();
 	
 	private String caminho = "/br/com/clinica/imagens/";
+	
+	private InitialButtonsListener listener;
 	
 	private ImageIcon imgPessoas = new ImageIcon(getClass().getResource(caminho + "Pessoas.png"));
 	private JButton registerPeopleButton = new JButton(imgPessoas);
@@ -40,7 +47,6 @@ public class InitialView extends JPanel{
 	
 	public InitialView() {
 		addComponents();
-//		this.setBackground(Color.WHITE);
 	}
 	
 	private void addComponents() {
@@ -54,26 +60,30 @@ public class InitialView extends JPanel{
 		gbc.insets = new Insets(0,15,0,15);
 		
 		redimensionarImagem(registerPeopleButton, imgPessoas);
-		this.add(registerPeopleButton, gbc);
 		setActionButton(registerPeopleButton, 1);
+		this.add(registerPeopleButton, gbc);
+		
 		
 		gbc.gridx = 1;
 		
 		redimensionarImagem(modifyPeopleButton, imgModificarPessoas);
-		this.add(modifyPeopleButton, gbc);
 		setActionButton(modifyPeopleButton, 2);
+		this.add(modifyPeopleButton, gbc);
+		
 		
 		gbc.gridx = 2;
 		
 		redimensionarImagem(registerQueryButton, imgConsultas);
-		this.add(registerQueryButton, gbc);
 		setActionButton(registerQueryButton, 3);
+		this.add(registerQueryButton, gbc);
+		
 		
 		gbc.gridx = 3;
 		
 		redimensionarImagem(modifyQueryButton, imgModificarConsultas);
-		this.add(modifyQueryButton, gbc);
 		setActionButton(modifyQueryButton, 4);
+		this.add(modifyQueryButton, gbc);
+		
 		
 		gbc.gridx = 0;
 		gbc.gridy = 1;
@@ -110,6 +120,10 @@ public class InitialView extends JPanel{
 		
 	}
 	
+	public void setListener(InitialButtonsListener listener) {
+		this.listener = listener;
+	}
+	
 	public JPanel getView() {
 		return this;
 	}
@@ -143,18 +157,42 @@ public class InitialView extends JPanel{
 	}
 	
 	private void setActionRegisterPeople(JButton button) {
-		//BOTÃO REGISTRAR PESSOAS
+		button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listener.registerPeopleButton();
+			}
+		});
 	}
 	
 	private void setActionModifyPeople(JButton button) {
-		//BOTÃO MODIFICAR PESSOAS
+		button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listener.modifyPeopleButton();				
+			}
+		});
 	}
 	
 	private void setActionRegisterQuery(JButton button) {
-		//BOTÃO REGISTRAR CONSULTAS
+		button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listener.registerQueryButton();
+			}
+		});
 	}
 	
 	private void setActionModifyQuery(JButton button) {
-		//BOTÃO MODIFICAR CONSULTAS
+		button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listener.modifyQueryButton();
+			}
+		});
 	}
 }

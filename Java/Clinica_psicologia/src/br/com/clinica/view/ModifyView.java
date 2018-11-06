@@ -6,15 +6,21 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import br.com.clinica.listener.RegisterPeopleButtonsListener;
+
 public class ModifyView extends JPanel{
 	
 	private int opt;
+	
+	private RegisterPeopleButtonsListener listener;
 	
 	private GridBagConstraints gbc = new GridBagConstraints();
 	
@@ -31,6 +37,8 @@ public class ModifyView extends JPanel{
 	private JButton registerSecretary = new JButton(imgPessoas);
 	private JLabel registerSecretaryText = new JLabel("Modificar Secretária");
 	
+	private JButton backButton = new JButton("Voltar");
+	
 	private JLabel rodape = new JLabel(" ");
 	private JLabel breadcrumb = new JLabel("Início > Moficiar Pessoas");
 	
@@ -42,41 +50,41 @@ public class ModifyView extends JPanel{
 	public void addComponents() {
 		this.setLayout(new GridBagLayout());
 		
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.weightx = 1.0;
-		gbc.gridwidth = 3;
+//		gbc.gridx = 0;
+//		gbc.gridy = 0;
+//		gbc.weightx = 1.0;
+//		gbc.gridwidth = 3;
 		gbc.insets = new Insets(1,10,1,1);
-		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+//		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
 		
-		this.add(breadcrumb,gbc);
 		
 		gbc.gridwidth = 1;
 		gbc.gridy = 1;
-		gbc.gridx = 0;
-		gbc.weighty = 0.3;
-		
+		gbc.gridx = 0;		
 		gbc.anchor = GridBagConstraints.CENTER;
 		
 		redimensionarImagem(registerPatient, imgPessoas);
+		addButtonsAction(registerPatient,1);
 		this.add(registerPatient, gbc);
 		
 		if(opt == 3) {
 			gbc.gridx = 1;
 			
 			redimensionarImagem(registerPsycologist, imgPessoas);
+			addButtonsAction(registerPsycologist,2);
 			this.add(registerPsycologist, gbc);
 			
 			gbc.gridx = 2;
 			
 			redimensionarImagem(registerSecretary, imgPessoas);
+			addButtonsAction(registerSecretary,3);
 			this.add(registerSecretary, gbc);
 		}
 		
 		gbc.gridx = 0;
-		gbc.gridy = 1;
+		gbc.gridy = 2;
 		gbc.gridheight = 2;
-		gbc.insets = new Insets(1,15,-155,1);
+		gbc.insets = new Insets(1,15,0,1);
 		
 		setFont(registerPatientText);
 		this.add(registerPatientText, gbc);
@@ -93,11 +101,16 @@ public class ModifyView extends JPanel{
 			this.add(registerSecretaryText, gbc);
 		}
 		
-		gbc.weighty = 0.9;
 		gbc.gridx = 0;
-		gbc.gridy = 2;
+		gbc.gridy = 3;
 		gbc.gridwidth = 3;
-		this.add(rodape, gbc);
+		gbc.insets = new Insets(50,0,0,0);
+		addButtonsAction(backButton, 4);
+		this.add(backButton, gbc);
+	}
+	
+	public void setListener(RegisterPeopleButtonsListener listener) {
+		this.listener = listener;
 	}
 	
 	private void redimensionarImagem(JButton img1, ImageIcon img2) {
@@ -111,5 +124,64 @@ public class ModifyView extends JPanel{
 	
 	public JPanel getView() {
 		return this;
+	}
+	
+	public void addButtonsAction(JButton button, int opt){
+		switch (opt) {
+			case 1:
+				modifyPatient(button);
+				break;
+			case 2:
+				modifyPsycologist(button);
+				break;
+			case 3:
+				modifySecretary(button);
+				break;
+			case 4:
+				backButton(button);
+				break;
+			default:
+				System.out.println("Erro ao registrar nos botões");
+		}
+	}	
+	
+	public void modifyPatient(JButton button) {
+		button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listener.registerPatient();
+			}
+		});
+	}
+	
+	public void modifyPsycologist(JButton button) {
+		button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listener.registerPsycologist();
+			}
+		});
+	}
+	
+	public void modifySecretary(JButton button) {
+		button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listener.registerSecretary();
+			}
+		});
+	}
+	
+	public void backButton(JButton button) {
+		button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listener.back();
+			}
+		});
 	}
 }
