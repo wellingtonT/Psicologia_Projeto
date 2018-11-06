@@ -33,6 +33,7 @@ public class LoginController {
 		frame.setConteudo(loginView);
 		frame.addComponent();
 		frame.setVisible(true);
+		
 	}
 	
 	public void enterButton() {

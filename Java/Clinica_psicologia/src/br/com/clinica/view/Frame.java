@@ -1,6 +1,7 @@
 package br.com.clinica.view;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -12,8 +13,7 @@ public class Frame extends JFrame {
 	
 	private JPanel content;
     private JPanel template;
-
-	
+    
 	public Frame() {
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); //Abrir na tela cheia
 		this.setMinimumSize(new Dimension(900,500));
@@ -27,6 +27,7 @@ public class Frame extends JFrame {
 	private void setPane() {
 		content = new JPanel();
 		content.setLayout(new BorderLayout());
+		
 		this.setContentPane(content);
 	}
 	
@@ -36,12 +37,10 @@ public class Frame extends JFrame {
 	}
 	
 	public void setTemplate(JPanel t) {
-		this.template = new JPanel();
 		this.template = t;
 	}
 	
 	public void setConteudo(JPanel conteudo) {
-		this.conteudo = new JPanel();
 		this.conteudo = conteudo;
 	}
 	
@@ -52,10 +51,6 @@ public class Frame extends JFrame {
 	public JPanel getConteudo() {
 		return this.conteudo;
 	}
-	
-	
-	
-	
 	
 	
 }

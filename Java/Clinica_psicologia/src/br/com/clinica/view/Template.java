@@ -86,16 +86,16 @@ public class Template extends JPanel {
 		return this;
 	}
 	
-	private void redimensionarImagem(JButton img1, ImageIcon img2) {
+	public void redimensionarImagem(JButton img1, ImageIcon img2) {
 		img1.setIcon(new ImageIcon(img2.getImage().getScaledInstance(200, 190, Image.SCALE_DEFAULT)));
 		img1.setPreferredSize(new Dimension(70,20));
 	}
 	
-	private void redimensionarImagem(JLabel img1, ImageIcon img2) {
+	public void redimensionarImagem(JLabel img1, ImageIcon img2) {
 		img1.setIcon(new ImageIcon(img2.getImage().getScaledInstance(260, 100, Image.SCALE_DEFAULT)));
 	}
 	
-	private void addExitButton() {
+	public void addExitButton() {
 		gbc.weighty = 1.0;
 		gbc.gridx = 1;
 		gbc.anchor = GridBagConstraints.LAST_LINE_END;
@@ -104,7 +104,7 @@ public class Template extends JPanel {
 		this.add(exitButton, gbc);
 	}
 	
-	private void addUserName() {
+	public void addUserName() {
 		gbc.anchor = GridBagConstraints.FIRST_LINE_END;
 
 		this.add(userName, gbc);

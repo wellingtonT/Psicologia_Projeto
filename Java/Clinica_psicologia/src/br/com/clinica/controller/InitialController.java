@@ -15,8 +15,9 @@ public class InitialController {
 	private Frame frame;
 	
 	public InitialController(Frame frame) {
-		initialView = new InitialView();
+		initialView = new InitialView();	
 		template = new Template(2);
+
 		
 		this.frame = frame;
 
@@ -29,7 +30,7 @@ public class InitialController {
 		frame.getTemplate().removeAll();
 		
 		frame.getConteudo().add(conteudo);
-		frame.getTemplate().add(template);
+		frame.getTemplate().add(template); //<-- AQUI É O PROBLEMA
 		
 		frame.getConteudo().revalidate();
 		frame.getTemplate().revalidate();
