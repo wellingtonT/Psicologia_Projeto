@@ -8,33 +8,32 @@ import javax.swing.JPanel;
 
 public class Frame extends JFrame {
 	
+	private JPanel conteudo;
 	
 	private JPanel content;
     private Template template;
-    private LoginView conteudoLogin;
-    private InitialView conteudoInicio;
-    private RegisterView conteudoRegistro;
-    private ModifyView conteudoModificar;
-    private RegisterQueryView conteudoRegistroConsulta;
-    private RegisterPeopleView conteudoPessoa;
+//    private LoginView conteudoLogin;
+//    private InitialView conteudoInicio;
+//    private RegisterView conteudoRegistro;
+//    private ModifyView conteudoModificar;
+//    private RegisterQueryView conteudoRegistroConsulta;
+//    private RegisterPeopleView conteudoPessoa;
 	
 	public Frame() {
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); //Abrir na tela cheia
 		this.setMinimumSize(new Dimension(900,500));
-		this.setTitle("Clínica Amaranto");
+		this.setTitle("Clï¿½nica Amaranto");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
-		
-		template = new Template(2);
-		conteudoLogin = new LoginView();
-		conteudoInicio = new InitialView();
-		conteudoRegistro = new RegisterView(3);
-		conteudoModificar = new ModifyView(3);
-		conteudoRegistroConsulta = new RegisterQueryView(1);
-		conteudoPessoa = new RegisterPeopleView(3,1);
-		
+//
+//		conteudoLogin = new LoginView();
+//		conteudoInicio = new InitialView();
+//		conteudoRegistro = new RegisterView(3);
+//		conteudoModificar = new ModifyView(3);
+//		conteudoRegistroConsulta = new RegisterQueryView(1);
+//		conteudoPessoa = new RegisterPeopleView(3,1);
+//		
 		setPane();
-		addComponent();	
 	}
 	
 	private void setPane() {
@@ -43,9 +42,31 @@ public class Frame extends JFrame {
 		this.setContentPane(content);
 	}
 	
-	private void addComponent() {
-		content.add(template.getView(), BorderLayout.NORTH);
-		content.add(conteudoRegistroConsulta.getView(), BorderLayout.CENTER);
+	
+	public void addComponent() {
+		content.add(template, BorderLayout.NORTH);
+		content.add(conteudo, BorderLayout.CENTER);
 	}
+	
+	public void setTemplate(Template t) {
+		template = t;
+	}
+	
+	public void setConteudo(JPanel conteudo) {
+		this.conteudo = conteudo;
+	}
+	
+	public JPanel getTemplate() {
+		return this.template;
+	}
+	
+	public JPanel getConteudo() {
+		return this.conteudo;
+	}
+	
+	
+	
+	
+	
 	
 }

@@ -1,13 +1,13 @@
 package br.com.clinica.main;
 
+import br.com.clinica.controller.LoginController;
 import br.com.clinica.view.Frame;
 
 public class StartApp {
 	
 	public static void main(String[] args) {
-		Frame frame = new Frame();
+		LoginController frame = new LoginController();
 		
-		frame.setVisible(true);
 	}
 	
 }

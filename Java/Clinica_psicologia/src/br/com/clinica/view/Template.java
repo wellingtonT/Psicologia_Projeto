@@ -39,11 +39,19 @@ public class Template extends JPanel {
 		addNorthComponents();
 	}
 	
+	public void setOpt(int opt) {
+		this.opt = opt;
+	}
+	
+	public int getOpt() {
+		return this.opt;
+	}
+	
 	public void setListener(ExitButtonListener listener) {
 		this.listener = listener;
 	}
 	
-	private  void addNorthComponents() {
+	public void addNorthComponents() {
 		this.setLayout(new GridBagLayout());
 		gbc = new GridBagConstraints();
 
@@ -65,7 +73,7 @@ public class Template extends JPanel {
 					addUserName();
 					break;
 					
-			default: System.out.println("Erro ao iniciar botão!");
+			default: System.out.println("Erro ao iniciar botï¿½o!");
 		}
 		
 	}

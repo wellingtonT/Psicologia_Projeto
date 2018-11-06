@@ -8,6 +8,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,7 +19,11 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import br.com.clinica.listener.EnterButtonListener;
+
 public class LoginView extends JPanel {
+	
+	private EnterButtonListener listener;
 	
 	private JLabel loginText = new JLabel("LOGIN"); 
 	
@@ -45,6 +51,9 @@ public class LoginView extends JPanel {
 		addComponent();	
 	}
 	
+	public void setListener(EnterButtonListener listener) {
+		this.listener = listener;
+	}
 	
 	private void addComponent() {	
 		this.setLayout(new GridBagLayout());
@@ -93,6 +102,13 @@ public class LoginView extends JPanel {
         gbc.insets = new Insets(50,35,1,1);
         
         redimensionarImagem(enterButton, imgEnter);
+        enterButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listener.enter();
+			}
+		});
         this.add(enterButton,gbc);
         
         gbc.weighty = 0.4;
