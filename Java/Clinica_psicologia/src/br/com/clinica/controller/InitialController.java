@@ -2,7 +2,7 @@ package br.com.clinica.controller;
 
 import java.awt.Component;
 
-import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import br.com.clinica.view.Frame;
 import br.com.clinica.view.InitialView;
@@ -16,30 +16,25 @@ public class InitialController {
 	
 	public InitialController(Frame frame) {
 		initialView = new InitialView();
-		
 		template = new Template(2);
 		
-		
 		this.frame = frame;
-	
-		mudarTemplate(template);
-		mudarConteudo(initialView);
+
+		mudarConteudo(initialView, template);
 		
 	}
 	
-	public void mudarConteudo(Component conteudo) {
+	public void mudarConteudo(Component conteudo, Component template) {
 		frame.getConteudo().removeAll();
-		frame.getConteudo().add(conteudo);
-		frame.getConteudo().revalidate();
-	}
-	
-	public void mudarTemplate(Component template) {
 		frame.getTemplate().removeAll();
+		
+		frame.getConteudo().add(conteudo);
 		frame.getTemplate().add(template);
-//		frame.setTemplate(this.template);
+		
+		frame.getConteudo().revalidate();
 		frame.getTemplate().revalidate();
+		
+		SwingUtilities.updateComponentTreeUI(frame);
 	}
-	
-	
-	
+
 }

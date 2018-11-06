@@ -11,28 +11,16 @@ public class Frame extends JFrame {
 	private JPanel conteudo;
 	
 	private JPanel content;
-    private Template template;
-//    private LoginView conteudoLogin;
-//    private InitialView conteudoInicio;
-//    private RegisterView conteudoRegistro;
-//    private ModifyView conteudoModificar;
-//    private RegisterQueryView conteudoRegistroConsulta;
-//    private RegisterPeopleView conteudoPessoa;
+    private JPanel template;
+
 	
 	public Frame() {
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); //Abrir na tela cheia
 		this.setMinimumSize(new Dimension(900,500));
-		this.setTitle("Clï¿½nica Amaranto");
+		this.setTitle("Clínica Amaranto");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
-//
-//		conteudoLogin = new LoginView();
-//		conteudoInicio = new InitialView();
-//		conteudoRegistro = new RegisterView(3);
-//		conteudoModificar = new ModifyView(3);
-//		conteudoRegistroConsulta = new RegisterQueryView(1);
-//		conteudoPessoa = new RegisterPeopleView(3,1);
-//		
+
 		setPane();
 	}
 	
@@ -42,17 +30,18 @@ public class Frame extends JFrame {
 		this.setContentPane(content);
 	}
 	
-	
 	public void addComponent() {
 		content.add(template, BorderLayout.NORTH);
 		content.add(conteudo, BorderLayout.CENTER);
 	}
 	
-	public void setTemplate(Template t) {
-		template = t;
+	public void setTemplate(JPanel t) {
+		this.template = new JPanel();
+		this.template = t;
 	}
 	
 	public void setConteudo(JPanel conteudo) {
+		this.conteudo = new JPanel();
 		this.conteudo = conteudo;
 	}
 	

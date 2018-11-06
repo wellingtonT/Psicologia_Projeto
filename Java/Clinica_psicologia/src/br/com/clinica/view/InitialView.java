@@ -51,6 +51,7 @@ public class InitialView extends JPanel{
 		gbc.weightx = 1.0;
 		gbc.weighty = 0.3;
 		gbc.anchor = GridBagConstraints.PAGE_END;
+		gbc.insets = new Insets(0,15,0,15);
 		
 		redimensionarImagem(registerPeopleButton, imgPessoas);
 		this.add(registerPeopleButton, gbc);
