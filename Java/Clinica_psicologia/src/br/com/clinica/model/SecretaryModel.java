@@ -6,7 +6,7 @@ public class SecretaryModel {
 	private String rua;
 	private String cidade;
 	private String telefone;
-	private float salario;
+	private String salario;
 	
 	public String getCpf() {
 		return cpf;
@@ -48,11 +48,11 @@ public class SecretaryModel {
 		this.telefone = telefone;
 	}
 	
-	public float getSalario() {
+	public String getSalario() {
 		return salario;
 	}
 	
-	public void setSalario(float salario) {
+	public void setSalario(String salario) {
 		this.salario = salario;
 	}
 }

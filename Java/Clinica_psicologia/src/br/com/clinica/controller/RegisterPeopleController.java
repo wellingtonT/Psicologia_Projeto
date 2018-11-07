@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
 
+import br.com.clinica.dao.DBException;
 import br.com.clinica.dao.PatientDAO;
 import br.com.clinica.dao.PsycologistDAO;
 import br.com.clinica.dao.SecretaryDAO;
@@ -35,6 +36,9 @@ public class RegisterPeopleController {
 	
 	public RegisterPeopleController(Frame frame,int p1, int p2) {
 		registerPeopleView = new RegisterPeopleView(p1, p2);
+		patientDao = new PatientDAO();
+		psycologistDao = new PsycologistDAO();
+		secretaryDao = new SecretaryDAO();
 		
 		this.frame = frame;
 		
@@ -65,8 +69,10 @@ public class RegisterPeopleController {
 					switch(p1) {
 						case 1: registerPatient();
 								break;
-						case 2:
-						case 3:
+						case 3: registerPsycologist();
+								break;
+						case 2: registerSecretary();
+								break;
 					}
 				}
 				
@@ -74,8 +80,7 @@ public class RegisterPeopleController {
 			
 			@Override
 			public void clean() {
-				//IMPLEMENTAR
-				System.out.println("Limpo!");
+				clearFields();
 			}
 			
 			@Override
@@ -88,13 +93,89 @@ public class RegisterPeopleController {
 			
 			@Override
 			public void search() {
-				System.out.println("Entrei!");
+				searchPeople();
 			}
 		});
 	}
 	
-	public void registerPatient() {
-
+	public void clearFields() {
+		registerPeopleView.getNameField().setText(null);
+		registerPeopleView.getCpfField().setText(null);
+		registerPeopleView.getStreetField().setText(null);
+		registerPeopleView.getCityField().setText(null);
+		registerPeopleView.getPhoneField().setText(null);
+		registerPeopleView.getMedicationField1().setText(null);
+		registerPeopleView.getMedicationField2().setText(null);
+		registerPeopleView.getDosageField1().setText(null);
+		registerPeopleView.getDosageField2().setText(null);
+		registerPeopleView.getSalaryField().setText(null);
+		registerPeopleView.getCrpField().setText(null);
+		registerPeopleView.getLocationField().setText(null);
 	}
+	
+	
+	public void getPatientFields() {
+		patientModel.setNome(registerPeopleView.getNameField().getText());
+		patientModel.setCpf(registerPeopleView.getCpfField().getText());
+		patientModel.setRua(registerPeopleView.getStreetField().getText());
+		patientModel.setCidade(registerPeopleView.getCityField().getText());
+		patientModel.setTelefone(registerPeopleView.getPhoneField().getText());
+		patientModel.setMedicamento1(registerPeopleView.getMedicationField1().getText());
+		patientModel.setDosagem1(registerPeopleView.getDosageField1().getText());
+		patientModel.setMedicamento2(registerPeopleView.getMedicationField2().getText());
+		patientModel.setDosagem2(registerPeopleView.getDosageField2().getText());
+	}
+	
+	public void registerPatient() {
+		patientModel = new PatientModel();
+		
+		getPatientFields();
+		
+		patientDao.save(patientModel);
+
+		clearFields();
+	}
+	
+	public void getPsycologistFields() {
+		psycologistModel.setNome(registerPeopleView.getNameField().getText());
+		psycologistModel.setCpf(registerPeopleView.getCpfField().getText());
+		psycologistModel.setRua(registerPeopleView.getStreetField().getText());
+		psycologistModel.setCidade(registerPeopleView.getCityField().getText());
+		psycologistModel.setTelefone(registerPeopleView.getPhoneField().getText());
+		psycologistModel.setSalario(registerPeopleView.getSalaryField().getText());
+		psycologistModel.setCrp(registerPeopleView.getCrpField().getText());
+	}
+	
+	public void registerPsycologist() {
+		psycologistModel = new PsycologistModel();
+		
+		getPsycologistFields();
+		
+		psycologistDao.save(psycologistModel);
+		clearFields();
+	}
+	
+	public void getSecretaryFields() {
+		secretaryModel.setNome(registerPeopleView.getNameField().getText());
+		secretaryModel.setCpf(registerPeopleView.getCpfField().getText());
+		secretaryModel.setRua(registerPeopleView.getStreetField().getText());
+		secretaryModel.setCidade(registerPeopleView.getCityField().getText());
+		secretaryModel.setTelefone(registerPeopleView.getPhoneField().getText());
+		secretaryModel.setSalario(registerPeopleView.getSalaryField().getText());
+	}
+	
+	public void registerSecretary() {
+		secretaryModel = new SecretaryModel();
+		
+		getSecretaryFields();
+		
+		secretaryDao.save(secretaryModel);
+		clearFields();
+	}
+	
+	public void searchPeople() {
+		//IMPLEMENTAR
+	}
+	
 	
 }

@@ -4,8 +4,10 @@ import java.awt.Component;
 
 import javax.swing.SwingUtilities;
 
+import br.com.clinica.dao.QueryDAO;
 import br.com.clinica.listener.SearchButtonListener;
 import br.com.clinica.listener.SelectButtonsListener;
+import br.com.clinica.model.QueryModel;
 import br.com.clinica.view.Frame;
 import br.com.clinica.view.RegisterQueryView;
 
@@ -14,11 +16,15 @@ public class RegisterQueryController {
 	private Frame frame;
 	
 	private RegisterQueryView registerQueryView;
+
+	private QueryDAO queryDao;
+	private QueryModel queryModel;
 	
 	private InitialController initialController;
 	
 	public RegisterQueryController(Frame frame, int opt) {
 		registerQueryView = new RegisterQueryView(opt);
+		queryDao = new QueryDAO();
 		
 		this.frame = frame;
 		
@@ -37,21 +43,20 @@ public class RegisterQueryController {
 	
 	public void buttonDefinition(Frame frame,int opt) {
 		registerQueryView.setListener(new SelectButtonsListener() {
-			
 			@Override
 			public void save() {
+				
 				if(opt == 1) { //Se opt for 1 é MODIFICAR
-					
+					modifyQuery();
 				}else { //se opt for 2 é CADASTRAR
-					
+					registerQuery();
 				}
 				System.out.println("Salvo!");
 			}
 			
 			@Override
 			public void clean() {
-				//IMPLEMENTAR
-				System.out.println("Limpo!");
+				clearFields();
 			}
 			
 			@Override
@@ -64,10 +69,49 @@ public class RegisterQueryController {
 			
 			@Override
 			public void search() {
-				System.out.println("Entrei!");
+				searchQuery();
 			}
 		});
+	}
+	
+	public void clearFields() {
+		registerQueryView.getCpfField().setText(null);
+		registerQueryView.getDayField().setText(null);
+		registerQueryView.getYearField().setText(null);
+		registerQueryView.getLocationField().setText(null);
+	}
+	
+	public void getFields() {
+		queryModel.setCpfPatient(registerQueryView.getCpfField().getText());
+		queryModel.setCpfPsycologist(registerQueryView.getPsycologistBox().getSelectedItem().toString());
+		queryModel.setDay(registerQueryView.getDayField().getText());
+		queryModel.setMonth(registerQueryView.getMonthBox().getSelectedItem().toString());
+		queryModel.setYear(registerQueryView.getYearField().getText());
+		queryModel.setHour(registerQueryView.getHourBox().getSelectedItem().toString());
 		
 	}
 	
+	public void registerQuery() {
+		queryModel = new QueryModel();
+		
+		getFields();
+		
+		queryDao.save(queryModel);
+		
+		clearFields();
+	}
+	
+	public void modifyQuery() {
+		queryModel = new QueryModel();
+		
+		getFields();
+		
+		clearFields();		
+	}
+	
+	public void searchQuery() {
+		queryModel = new QueryModel();
+		
+//		registerQueryView.getPsycologistBox().setSelectedItem("Teste3");
+	}
 }

@@ -298,4 +298,63 @@ public class RegisterQueryView extends JPanel {
 			}
 		});
 	}
+
+	public JTextField getCpfField() {
+		return cpfField;
+	}
+
+	public JComboBox getPsycologistBox() {
+		return psycologistBox;
+	}
+
+	public JTextField getDayField() {
+		return dayField;
+	}
+
+	public JComboBox getMonthBox() {
+		return monthBox;
+	}
+
+	public JTextField getYearField() {
+		return yearField;
+	}
+
+	public JComboBox getHourBox() {
+		return hourBox;
+	}
+
+	public JTextField getLocationField() {
+		return locationField;
+	}
+
+	public void setCpfField(JTextField cpfField) {
+		this.cpfField = cpfField;
+	}
+
+	public void setPsycologistBox(JComboBox psycologistBox) {
+		this.psycologistBox = psycologistBox;
+	}
+
+	public void setDayField(JTextField dayField) {
+		this.dayField = dayField;
+	}
+
+	public void setMonthBox(JComboBox monthBox) {
+		this.monthBox = monthBox;
+	}
+
+	public void setYearField(JTextField yearField) {
+		this.yearField = yearField;
+	}
+
+	public void setHourBox(JComboBox hourBox) {
+		this.hourBox = hourBox;
+	}
+
+	public void setLocationField(JTextField locationField) {
+		this.locationField = locationField;
+	}
+	
+	
+	
 }

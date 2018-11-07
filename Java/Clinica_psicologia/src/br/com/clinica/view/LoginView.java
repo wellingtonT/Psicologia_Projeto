@@ -125,4 +125,23 @@ public class LoginView extends JPanel {
 		img1.setPreferredSize(new Dimension(149,45));
 		img1.setBackground(Color.lightGray);
 	}
+
+	public JTextField getCpfField() {
+		return cpfField;
+	}
+
+	public JPasswordField getPasswordField() {
+		return passwordField;
+	}
+
+	public void setCpfField(JTextField cpfField) {
+		this.cpfField = cpfField;
+	}
+
+	public void setPasswordField(JPasswordField passwordField) {
+		this.passwordField = passwordField;
+	}
+	
+	
+	
 }

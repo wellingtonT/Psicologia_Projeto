@@ -427,6 +427,98 @@ public class RegisterPeopleView extends JPanel{
 		return nameField;
 	}
 
+	public JTextField getCpfField() {
+		return cpfField;
+	}
+
+	public JTextField getStreetField() {
+		return streetField;
+	}
+
+	public JTextField getCityField() {
+		return cityField;
+	}
+
+	public JTextField getPhoneField() {
+		return phoneField;
+	}
+
+	public JTextField getLocationField() {
+		return locationField;
+	}
+
+	public JTextField getMedicationField1() {
+		return medicationField1;
+	}
+
+	public JTextField getMedicationField2() {
+		return medicationField2;
+	}
+
+	public JTextField getDosageField1() {
+		return dosageField1;
+	}
+
+	public JTextField getDosageField2() {
+		return dosageField2;
+	}
+
+	public JTextField getSalaryField() {
+		return salaryField;
+	}
+
+	public JTextField getCrpField() {
+		return crpField;
+	}
+
+	public void setNameField(JTextField nameField) {
+		this.nameField = nameField;
+	}
+
+	public void setCpfField(JTextField cpfField) {
+		this.cpfField = cpfField;
+	}
+
+	public void setStreetField(JTextField streetField) {
+		this.streetField = streetField;
+	}
+
+	public void setCityField(JTextField cityField) {
+		this.cityField = cityField;
+	}
+
+	public void setPhoneField(JTextField phoneField) {
+		this.phoneField = phoneField;
+	}
+
+	public void setLocationField(JTextField locationField) {
+		this.locationField = locationField;
+	}
+
+	public void setMedicationField1(JTextField medicationField1) {
+		this.medicationField1 = medicationField1;
+	}
+
+	public void setMedicationField2(JTextField medicationField2) {
+		this.medicationField2 = medicationField2;
+	}
+
+	public void setDosageField1(JTextField dosageField1) {
+		this.dosageField1 = dosageField1;
+	}
+
+	public void setDosageField2(JTextField dosageField2) {
+		this.dosageField2 = dosageField2;
+	}
+
+	public void setSalaryField(JTextField salaryField) {
+		this.salaryField = salaryField;
+	}
+
+	public void setCrpField(JTextField crpField) {
+		this.crpField = crpField;
+	}
+
 	
 	
 }

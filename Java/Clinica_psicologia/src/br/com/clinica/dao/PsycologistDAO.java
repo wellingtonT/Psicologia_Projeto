@@ -17,13 +17,19 @@ public class PsycologistDAO {
 		return psycologistData;
 	}
 	
-	public PsycologistModel getSecretary(String cpf) {
+	public PsycologistModel getPsycologist(String cpf) {
+		
+//		return psycologistData.get(0);
 		
 		for (PsycologistModel psycologist : psycologistData) {
 			if(psycologist.getCpf() == cpf) {
 				return psycologist;
 			}
+//			System.out.println(cpf);
+//			System.out.println(psycologist.getCpf());
+//			System.out.println(psycologist.getCpf() == cpf);
 		}
+		
 		
 		return null;
 	}

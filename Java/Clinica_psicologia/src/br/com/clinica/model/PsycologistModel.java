@@ -6,7 +6,7 @@ public class PsycologistModel {
 	private String rua;
 	private String cidade;
 	private String telefone;
-	private float salario;
+	private String salario;
 	private String crp;
 	
 	public String getCpf() {
@@ -49,11 +49,11 @@ public class PsycologistModel {
 		this.telefone = telefone;
 	}
 	
-	public float getSalario() {
+	public String getSalario() {
 		return salario;
 	}
 	
-	public void setSalario(float salario) {
+	public void setSalario(String salario) {
 		this.salario = salario;
 	}
 	

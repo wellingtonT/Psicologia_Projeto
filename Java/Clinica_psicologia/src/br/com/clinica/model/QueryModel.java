@@ -3,7 +3,9 @@ package br.com.clinica.model;
 public class QueryModel {
 	private String cpfPatient;
 	private String cpfPsycologist;
-	private String date;
+	private String day;
+	private String month;
+	private String year;
 	private String hour;
 	
 	public String getCpfPatient() {
@@ -22,14 +24,6 @@ public class QueryModel {
 		this.cpfPsycologist = cpfPsycologist;
 	}
 	
-	public String getDate() {
-		return date;
-	}
-	
-	public void setDate(String date) {
-		this.date = date;
-	}
-	
 	public String getHour() {
 		return hour;
 	}
@@ -37,5 +31,30 @@ public class QueryModel {
 	public void setHour(String hour) {
 		this.hour = hour;
 	}
+
+	public String getDay() {
+		return day;
+	}
+
+	public void setDay(String day) {
+		this.day = day;
+	}
+
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+	
 	
 }
