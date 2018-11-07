@@ -17,14 +17,14 @@ public class Frame extends JFrame {
 	public Frame() {
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); //Abrir na tela cheia
 		this.setMinimumSize(new Dimension(900,500));
-		this.setTitle("Clínica Amaranto");
+		this.setTitle("Clï¿½nica Amaranto");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 
 		setPane();
 	}
 	
-	private void setPane() {
+	public void setPane() {
 		content = new JPanel();
 		content.setLayout(new BorderLayout());
 		

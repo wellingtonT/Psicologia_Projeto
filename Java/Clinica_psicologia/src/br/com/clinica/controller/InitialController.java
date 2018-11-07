@@ -11,6 +11,7 @@ import br.com.clinica.view.ModifyView;
 import br.com.clinica.view.RegisterQueryView;
 import br.com.clinica.view.RegisterView;
 import br.com.clinica.view.Template;
+import br.com.clinica.view.Template2;
 
 public class InitialController {
 	
@@ -25,7 +26,8 @@ public class InitialController {
 	public InitialController(Frame frame) {
 		initialView = new InitialView();	
 		template = new Template(2);
-
+		
+//		Template2 s = new Template2();
 		this.frame = frame;
 
 		mudarConteudo(initialView, template);
@@ -35,13 +37,13 @@ public class InitialController {
 	
 	public void mudarConteudo(Component conteudo, Component template) {
 		frame.getConteudo().removeAll();
-//		frame.getTemplate().removeAll();
+		frame.getTemplate().removeAll();
 		
 		frame.getConteudo().add(conteudo);
-//		frame.getTemplate().add(template); //<-- AQUI É O PROBLEMA
+		frame.getTemplate().add(template); 
 		
 		frame.getConteudo().revalidate();
-//		frame.getTemplate().revalidate();
+		frame.getTemplate().revalidate();
 		
 		SwingUtilities.updateComponentTreeUI(frame);
 	}

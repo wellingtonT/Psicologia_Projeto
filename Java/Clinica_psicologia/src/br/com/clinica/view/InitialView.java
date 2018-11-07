@@ -49,7 +49,7 @@ public class InitialView extends JPanel{
 		addComponents();
 	}
 	
-	private void addComponents() {
+	public void addComponents() {
 		this.setLayout(new GridBagLayout());
 		
 		gbc.gridx = 0;
@@ -128,16 +128,16 @@ public class InitialView extends JPanel{
 		return this;
 	}
 	
-	private void redimensionarImagem(JButton img1, ImageIcon img2) {
+	public void redimensionarImagem(JButton img1, ImageIcon img2) {
 		img1.setIcon(new ImageIcon(img2.getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT)));
 		img1.setPreferredSize(new Dimension(180,130));
 	}
 	
-	private void setFont(JLabel text) {
+	public void setFont(JLabel text) {
 		text.setFont(new Font("Georgia", Font.ROMAN_BASELINE, 20));
 	}
 	
-	private void setActionButton(JButton button, int opt) {
+	public void setActionButton(JButton button, int opt) {
 		switch(opt) {
 			case 1: 
 				setActionRegisterPeople(button);
@@ -152,11 +152,11 @@ public class InitialView extends JPanel{
 				setActionModifyQuery(button);
 				break;
 			default:
-				System.out.println("Valor ou botão inválido!");
+				System.out.println("Valor ou botï¿½o invï¿½lido!");
 		}
 	}
 	
-	private void setActionRegisterPeople(JButton button) {
+	public void setActionRegisterPeople(JButton button) {
 		button.addActionListener(new ActionListener() {
 			
 			@Override
@@ -166,7 +166,7 @@ public class InitialView extends JPanel{
 		});
 	}
 	
-	private void setActionModifyPeople(JButton button) {
+	public void setActionModifyPeople(JButton button) {
 		button.addActionListener(new ActionListener() {
 			
 			@Override
@@ -176,7 +176,7 @@ public class InitialView extends JPanel{
 		});
 	}
 	
-	private void setActionRegisterQuery(JButton button) {
+	public void setActionRegisterQuery(JButton button) {
 		button.addActionListener(new ActionListener() {
 			
 			@Override
@@ -186,7 +186,7 @@ public class InitialView extends JPanel{
 		});
 	}
 	
-	private void setActionModifyQuery(JButton button) {
+	public void setActionModifyQuery(JButton button) {
 		button.addActionListener(new ActionListener() {
 			
 			@Override

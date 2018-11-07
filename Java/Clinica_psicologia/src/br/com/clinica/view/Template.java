@@ -27,7 +27,7 @@ public class Template extends JPanel {
 	private ImageIcon imgExit = new ImageIcon(getClass().getResource(caminho + "Sair.png"));
 	private JButton exitButton = new JButton(imgExit);
 	
-	public JLabel userName = new JLabel();
+	private JLabel userName = new JLabel();
 	
 	private ImageIcon imgLogo = new ImageIcon(getClass().getResource(caminho + "Logo.png"));
 	private JLabel logo = new JLabel(imgLogo);
@@ -65,8 +65,8 @@ public class Template extends JPanel {
 		
 		switch(opt) {
 			case 1: this.remove(exitButton);
-					this.validate();
-					this.repaint();
+					//this.validate();
+					//this.repaint();
 					break;
 					
 			case 2: addExitButton();
@@ -75,6 +75,8 @@ public class Template extends JPanel {
 					
 			default: System.out.println("Erro ao iniciar bot�o!");
 		}
+		
+		//this.validate();
 		
 	}
 
