@@ -9,12 +9,11 @@ public class DBUtil {
 		try{
 			Class.forName("org.postgresql.Driver");
 
-			String url = "jdbc:postgresql://localhost:5432/psicologia";
+			String url = "jdbc:postgresql://localhost:5432/Psicologia";
 			String username = "postgres";
 			String password = "123456";
 			
-			Connection conn = 
-					DriverManager.getConnection(url, username, password);
+			Connection conn = DriverManager.getConnection(url, username, password);
 
 			return conn;
 		} catch (ClassNotFoundException e){
