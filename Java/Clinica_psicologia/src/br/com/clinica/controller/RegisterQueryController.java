@@ -47,9 +47,9 @@ public class RegisterQueryController {
 			@Override
 			public void save() {
 				
-				if(opt == 2) { //Se opt for 2 é MODIFICAR
+				if(opt == 2) { //Se opt for 2 ï¿½ MODIFICAR
 					modifyQuery();
-				}else { //se opt for 1 é CADASTRAR
+				}else { //se opt for 1 ï¿½ CADASTRAR
 					registerQuery();
 				}
 				System.out.println("Salvo!");

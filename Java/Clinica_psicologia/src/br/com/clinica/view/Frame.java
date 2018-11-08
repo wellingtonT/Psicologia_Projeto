@@ -33,6 +33,8 @@ public class Frame extends JFrame {
 	}
 	
 	public void addComponent() {
+		template.setLayout(new BorderLayout());
+		content.setLayout(new BorderLayout());
 		content.add(template, BorderLayout.NORTH);
 		content.add(conteudo, BorderLayout.CENTER);
 	}

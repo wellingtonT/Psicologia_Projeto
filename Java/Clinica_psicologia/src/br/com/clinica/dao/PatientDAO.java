@@ -1,5 +1,6 @@
 package br.com.clinica.dao;
 
+import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,17 +35,15 @@ public class PatientDAO {
 	
 	public boolean searchPatient(String cpf) throws SQLException {
 		String sql = "SELECT NOME FROM paciente"
-				+ "WHERE CPF = (?);";
+				+ "WHERE CPF = '" + cpf + "';";
 		
-		PreparedStatement prep = connection.prepareStatement(sql);
+		java.sql.Statement statement = connection.createStatement();
 		
-		prep.setString(1, cpf);
+		ResultSet resultSet = statement.executeQuery(sql);
 		
-		ResultSet rs = prep.executeQuery();
+		System.out.println("Linhas: " + resultSet.getRow());
 		
-		System.out.println("Result = " + rs.getRow());
-		
-		if(rs.getRow() > 0) return true;
+		if(resultSet.getRow() > 0) return true;
 		else return false;
 		
 	}

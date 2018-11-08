@@ -28,7 +28,7 @@ public class InitialController {
 		initialView = new InitialView();	
 		template = new Template(2);
 		
-//		Template2 s = new Template2();
+		Template2 s = new Template2(2);
 		this.frame = frame;
 
 		mudarConteudo(initialView, template);
@@ -38,13 +38,13 @@ public class InitialController {
 	
 	public void mudarConteudo(Component conteudo, Component template) {
 		frame.getConteudo().removeAll();
-//		frame.getTemplate().removeAll();
+		frame.getTemplate().removeAll();
 		
 		frame.getConteudo().add(conteudo);
-//		frame.getTemplate().add(template); 
+		frame.getTemplate().add(template); 
 		
 		frame.getConteudo().revalidate();
-//		frame.getTemplate().revalidate();
+		frame.getTemplate().revalidate();
 		
 		SwingUtilities.updateComponentTreeUI(frame);
 	}
