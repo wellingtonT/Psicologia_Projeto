@@ -1,11 +1,10 @@
 package br.com.clinica.controller;
 
 import java.awt.Component;
-import java.util.ArrayList;
+import java.sql.SQLException;
 
 import javax.swing.SwingUtilities;
 
-import br.com.clinica.dao.DBException;
 import br.com.clinica.dao.PatientDAO;
 import br.com.clinica.dao.PsycologistDAO;
 import br.com.clinica.dao.SecretaryDAO;
@@ -34,7 +33,7 @@ public class RegisterPeopleController {
 	private SecretaryDAO secretaryDao;
 	private SecretaryModel secretaryModel;
 	
-	public RegisterPeopleController(Frame frame,int p1, int p2) {
+	public RegisterPeopleController(Frame frame,int p1, int p2) throws SQLException {
 		registerPeopleView = new RegisterPeopleView(p1, p2);
 		patientDao = new PatientDAO();
 		psycologistDao = new PsycologistDAO();
@@ -131,7 +130,12 @@ public class RegisterPeopleController {
 		
 		getPatientFields();
 		
-		patientDao.save(patientModel);
+//		patientDao.save(patientModel);
+		try {
+			patientDao.save(patientModel);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		clearFields();
 	}
@@ -151,7 +155,11 @@ public class RegisterPeopleController {
 		
 		getPsycologistFields();
 		
-		psycologistDao.save(psycologistModel);
+		try {
+			psycologistDao.save(psycologistModel);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		clearFields();
 	}
 	
@@ -169,7 +177,11 @@ public class RegisterPeopleController {
 		
 		getSecretaryFields();
 		
-		secretaryDao.save(secretaryModel);
+		try {
+			secretaryDao.save(secretaryModel);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		clearFields();
 	}
 	

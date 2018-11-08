@@ -3,6 +3,7 @@ package br.com.clinica.model;
 public class QueryModel {
 	private String cpfPatient;
 	private String cpfPsycologist;
+	private String cpfSecretary;
 	private String day;
 	private String month;
 	private String year;
@@ -55,6 +56,15 @@ public class QueryModel {
 	public void setYear(String year) {
 		this.year = year;
 	}
+
+	public String getCpfSecretary() {
+		return cpfSecretary;
+	}
+
+	public void setCpfSecretary(String cpfSecretary) {
+		this.cpfSecretary = cpfSecretary;
+	}
+	
 	
 	
 }

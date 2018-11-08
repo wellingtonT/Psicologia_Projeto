@@ -1,36 +1,36 @@
 package br.com.clinica.dao;
 
-import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import br.com.clinica.model.PsycologistModel;
 
 
 public class PsycologistDAO {
 	
-	private ArrayList<PsycologistModel> psycologistData = new ArrayList<>();
+	private Connection connection;
 	
-	public void save(PsycologistModel psycologist) {
-		psycologistData.add(psycologist);
+	public PsycologistDAO() throws SQLException {
+		connection = ConnectionUtil.getConnection();
 	}
 	
-	public ArrayList<PsycologistModel> getAll(){
-		return psycologistData;
-	}
-	
-	public PsycologistModel getPsycologist(String cpf) {
+	public void save(PsycologistModel psycologist) throws SQLException {
+
+		String sql = "INSERT INTO psicologo"
+				+ " (CPF, NOME, RUA, CIDADE, TELEFONE, SALARIO, CRP)"
+				+ " VALUES (?, ?, ?, ?, ?, ?, ?);";
 		
-//		return psycologistData.get(0);
+		PreparedStatement prep = connection.prepareStatement(sql);
 		
-		for (PsycologistModel psycologist : psycologistData) {
-			if(psycologist.getCpf() == cpf) {
-				return psycologist;
-			}
-//			System.out.println(cpf);
-//			System.out.println(psycologist.getCpf());
-//			System.out.println(psycologist.getCpf() == cpf);
-		}
+		prep.setString(1, psycologist.getCpf());
+		prep.setString(2, psycologist.getNome());
+		prep.setString(3, psycologist.getRua());
+		prep.setString(4, psycologist.getCidade());
+		prep.setString(5, psycologist.getTelefone());
+		prep.setString(6, psycologist.getSalario());
+		prep.setString(7, psycologist.getCrp());
 		
-		
-		return null;
+		prep.execute();
 	}
 }

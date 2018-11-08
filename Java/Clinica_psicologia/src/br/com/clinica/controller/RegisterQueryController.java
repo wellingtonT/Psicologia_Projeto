@@ -1,6 +1,7 @@
 package br.com.clinica.controller;
 
 import java.awt.Component;
+import java.sql.SQLException;
 
 import javax.swing.SwingUtilities;
 
@@ -22,7 +23,7 @@ public class RegisterQueryController {
 	
 	private InitialController initialController;
 	
-	public RegisterQueryController(Frame frame, int opt) {
+	public RegisterQueryController(Frame frame, int opt) throws SQLException {
 		registerQueryView = new RegisterQueryView(opt);
 		queryDao = new QueryDAO();
 		
@@ -46,9 +47,9 @@ public class RegisterQueryController {
 			@Override
 			public void save() {
 				
-				if(opt == 1) { //Se opt for 1 é MODIFICAR
+				if(opt == 2) { //Se opt for 2 é MODIFICAR
 					modifyQuery();
-				}else { //se opt for 2 é CADASTRAR
+				}else { //se opt for 1 é CADASTRAR
 					registerQuery();
 				}
 				System.out.println("Salvo!");
@@ -96,7 +97,19 @@ public class RegisterQueryController {
 		
 		getFields();
 		
-		queryDao.save(queryModel);
+//		System.out.println(queryModel.getCpfPatient());
+//		System.out.println(queryModel.getCpfPsycologist());
+//		System.out.println(queryModel.getCpfSecretary());
+//		System.out.println(queryModel.getDay());
+//		System.out.println(queryModel.getMonth());
+//		System.out.println(queryModel.getYear());		
+//		System.out.println(queryModel.getHour());
+		try {
+			queryDao.save(queryModel);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		clearFields();
 	}

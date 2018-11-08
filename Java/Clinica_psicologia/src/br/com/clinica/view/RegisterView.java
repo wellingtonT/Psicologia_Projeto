@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -151,7 +152,12 @@ public class RegisterView extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				listener.registerPatient();
+				try {
+					listener.registerPatient();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 	}
@@ -161,7 +167,12 @@ public class RegisterView extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				listener.registerPsycologist();
+				try {
+					listener.registerPsycologist();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 	}
@@ -171,7 +182,12 @@ public class RegisterView extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				listener.registerSecretary();
+				try {
+					listener.registerSecretary();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 	}

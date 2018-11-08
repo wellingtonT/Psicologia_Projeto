@@ -1,6 +1,7 @@
 package br.com.clinica.controller;
 
 import java.awt.Component;
+import java.sql.SQLException;
 
 import javax.swing.SwingUtilities;
 
@@ -41,17 +42,17 @@ public class ModifyController {
 		modifyView.setListener(new RegisterPeopleButtonsListener() {
 			
 			@Override
-			public void registerSecretary() {
+			public void registerSecretary() throws SQLException {
 				registerPeopleController = new RegisterPeopleController(frame, 2,1);
 			}
 			
 			@Override
-			public void registerPsycologist() {
+			public void registerPsycologist() throws SQLException {
 				registerPeopleController = new RegisterPeopleController(frame, 3,1);
 			}
 			
 			@Override
-			public void registerPatient() {
+			public void registerPatient() throws SQLException {
 				registerPeopleController = new RegisterPeopleController(frame, 1,1);
 			}
 

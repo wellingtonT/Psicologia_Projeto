@@ -1,31 +1,36 @@
 package br.com.clinica.dao;
 
-import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
+import br.com.clinica.model.PsycologistModel;
 import br.com.clinica.model.SecretaryModel;
-import br.com.clinica.model.UserModel;
 
 public class SecretaryDAO {
 	
-	private ArrayList<SecretaryModel> secretaryData = new ArrayList<>();
+	private Connection connection;
 	
-	public void save(SecretaryModel secretary) {
-		secretaryData.add(secretary);
+	public SecretaryDAO() throws SQLException {
+		connection = ConnectionUtil.getConnection();
 	}
 	
-	public ArrayList<SecretaryModel> getAll(){
-		return secretaryData;
-	}
-	
-	public SecretaryModel getSecretary(String cpf) {
+	public void save(SecretaryModel secretary) throws SQLException {
+
+		String sql = "INSERT INTO secretaria"
+				+ " (CPF, NOME, RUA, CIDADE, TELEFONE, SALARIO)"
+				+ " VALUES (?, ?, ?, ?, ?, ?);";
 		
-		for (SecretaryModel secretary : secretaryData) {
-			if(secretary.getCpf() == cpf) {
-				return secretary;
-			}
-		}
+		PreparedStatement prep = connection.prepareStatement(sql);
 		
-		return null;
+		prep.setString(1, secretary.getCpf());
+		prep.setString(2, secretary.getNome());
+		prep.setString(3, secretary.getRua());
+		prep.setString(4, secretary.getCidade());
+		prep.setString(5, secretary.getTelefone());
+		prep.setString(6, secretary.getSalario());
+		
+		prep.execute();
 	}
 	
 }

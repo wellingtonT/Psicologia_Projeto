@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -181,7 +182,12 @@ public class InitialView extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				listener.registerQueryButton();
+				try {
+					listener.registerQueryButton();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 	}
@@ -191,7 +197,12 @@ public class InitialView extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				listener.modifyQueryButton();
+				try {
+					listener.modifyQueryButton();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 	}

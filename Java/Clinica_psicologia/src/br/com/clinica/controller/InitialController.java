@@ -1,6 +1,7 @@
 package br.com.clinica.controller;
 
 import java.awt.Component;
+import java.sql.SQLException;
 
 import javax.swing.SwingUtilities;
 
@@ -37,13 +38,13 @@ public class InitialController {
 	
 	public void mudarConteudo(Component conteudo, Component template) {
 		frame.getConteudo().removeAll();
-		frame.getTemplate().removeAll();
+//		frame.getTemplate().removeAll();
 		
 		frame.getConteudo().add(conteudo);
-		frame.getTemplate().add(template); 
+//		frame.getTemplate().add(template); 
 		
 		frame.getConteudo().revalidate();
-		frame.getTemplate().revalidate();
+//		frame.getTemplate().revalidate();
 		
 		SwingUtilities.updateComponentTreeUI(frame);
 	}
@@ -52,7 +53,7 @@ public class InitialController {
 		initialView.setListener(new InitialButtonsListener() {
 			
 			@Override
-			public void registerQueryButton() {
+			public void registerQueryButton() throws SQLException {
 				registerQueryController = new RegisterQueryController(frame, 1);
 			}
 			
@@ -62,7 +63,7 @@ public class InitialController {
 			}
 			
 			@Override
-			public void modifyQueryButton() {
+			public void modifyQueryButton() throws SQLException {
 				registerQueryController = new RegisterQueryController(frame,2);
 			}
 			
