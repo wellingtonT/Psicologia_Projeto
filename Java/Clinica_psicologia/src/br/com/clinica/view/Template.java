@@ -35,7 +35,7 @@ public class Template extends JPanel {
 	public Template(int opt) {
 		this.opt = opt;
 		
-		this.setPreferredSize(new Dimension(300,125));
+		this.setPreferredSize(new Dimension(0,125));
 		addNorthComponents();
 	}
 	
@@ -65,8 +65,8 @@ public class Template extends JPanel {
 		
 		switch(opt) {
 			case 1: this.remove(exitButton);
-					//this.validate();
-					//this.repaint();
+//					this.validate();
+//					this.repaint();
 					break;
 					
 			case 2: addExitButton();

@@ -28,7 +28,6 @@ public class InitialController {
 		initialView = new InitialView();	
 		template = new Template(2);
 		
-		Template2 s = new Template2(2);
 		this.frame = frame;
 
 		mudarConteudo(initialView, template);

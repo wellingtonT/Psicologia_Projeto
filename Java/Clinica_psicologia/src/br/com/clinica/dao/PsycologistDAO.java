@@ -2,6 +2,7 @@ package br.com.clinica.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import br.com.clinica.model.PsycologistModel;
@@ -33,4 +34,23 @@ public class PsycologistDAO {
 		
 		prep.execute();
 	}
+	
+	public String cpfPsycologist(String name) {
+		String sql = "SELECT cpf FROM psicologo "
+				+ "WHERE nome LIKE '" + name + "';";
+		
+		java.sql.Statement statement;
+		try {
+			statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(sql);
+			resultSet.next();
+			return resultSet.getString(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+		
+	}
+	
 }

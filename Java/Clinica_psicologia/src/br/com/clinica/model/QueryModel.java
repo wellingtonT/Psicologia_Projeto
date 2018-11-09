@@ -2,7 +2,7 @@ package br.com.clinica.model;
 
 public class QueryModel {
 	private String cpfPatient;
-	private String cpfPsycologist;
+	private String namePsycologist;
 	private String cpfSecretary;
 	private String day;
 	private String month;
@@ -17,12 +17,12 @@ public class QueryModel {
 		this.cpfPatient = cpfPatient;
 	}
 	
-	public String getCpfPsycologist() {
-		return cpfPsycologist;
+	public String getNamePsycologist() {
+		return namePsycologist;
 	}
 	
 	public void setCpfPsycologist(String cpfPsycologist) {
-		this.cpfPsycologist = cpfPsycologist;
+		this.namePsycologist = cpfPsycologist;
 	}
 	
 	public String getHour() {

@@ -34,13 +34,15 @@ public class Frame extends JFrame {
 	
 	public void addComponent() {
 		template.setLayout(new BorderLayout());
-		content.setLayout(new BorderLayout());
+		
 		content.add(template, BorderLayout.NORTH);
 		content.add(conteudo, BorderLayout.CENTER);
+		
 	}
 	
 	public void setTemplate(JPanel t) {
 		this.template = t;
+		
 	}
 	
 	public void setConteudo(JPanel conteudo) {

@@ -1,5 +1,9 @@
 package br.com.clinica.controller;
 
+import java.awt.Component;
+
+import javax.swing.SwingUtilities;
+
 import br.com.clinica.listener.EnterButtonListener;
 import br.com.clinica.view.Frame;
 import br.com.clinica.view.LoginView;
@@ -31,13 +35,13 @@ public class LoginController {
 	public void initApp() {
 		frame.setTemplate(template);
 		frame.setConteudo(loginView);
-		frame.addComponent();
+		frame.addComponent();	
 		frame.setVisible(true);
-		
 	}
 	
 	public void enterButton() {
 		initialController = new InitialController(frame);
 	}
 	
+
 }

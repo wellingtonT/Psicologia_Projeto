@@ -33,15 +33,15 @@ public class PatientDAO {
 		prep.execute();
 	}
 	
-	public boolean searchPatient(String cpf) throws SQLException {
-		String sql = "SELECT NOME FROM paciente"
-				+ "WHERE CPF = '" + cpf + "';";
+	public boolean existPatient(String cpf) throws SQLException {
+		String sql = "SELECT * FROM paciente "
+				+ "WHERE cpf LIKE '" + cpf + "';";
 		
 		java.sql.Statement statement = connection.createStatement();
 		
 		ResultSet resultSet = statement.executeQuery(sql);
 		
-		System.out.println("Linhas: " + resultSet.getRow());
+		resultSet.next();
 		
 		if(resultSet.getRow() > 0) return true;
 		else return false;

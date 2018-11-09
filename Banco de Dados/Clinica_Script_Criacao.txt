@@ -1,0 +1,180 @@
+CREATE SEQUENCE public.consulta_id_seq
+
+    START WITH 1
+
+    INCREMENT BY 1
+
+    NO MINVALUE
+
+    NO MAXVALUE
+
+    CACHE 1;
+
+CREATE TABLE public.consulta (
+
+    id integer DEFAULT nextval('public.consulta_id_seq'::regclass) NOT NULL,
+
+    data_agendada date NOT NULL,
+
+    hora_agendada time without time zone NOT NULL,
+
+    cpf_paciente character varying(11) NOT NULL,
+
+    cpf_psicologo character varying(11) NOT NULL,
+
+    cpf_secretaria character varying(11) NOT NULL
+);
+
+CREATE SEQUENCE public.medicamento_id_seq
+
+    START WITH 1
+
+    INCREMENT BY 1
+
+    NO MINVALUE
+
+    NO MAXVALUE
+
+    CACHE 1;
+
+CREATE TABLE public.medicamento (
+
+    id integer DEFAULT nextval('public.medicamento_id_seq'::regclass) NOT NULL,
+
+    nome character varying(50),
+
+    dose character varying(50),
+
+    cpf_paciente character varying(11) NOT NULL
+);
+
+CREATE TABLE public.paciente (
+
+    cpf character varying(11) NOT NULL,
+
+    nome character varying(50) NOT NULL,
+
+    rua character varying(50) NOT NULL,
+
+    cidade character varying(30) NOT NULL,
+
+    telefone character varying(15) NOT NULL
+);
+
+CREATE TABLE public.psicologo (
+
+    cpf character varying(11) NOT NULL,
+
+    nome character varying(50) NOT NULL,
+
+    rua character varying(50) NOT NULL,
+
+    cidade character varying(30) NOT NULL,
+
+    telefone character varying(15) NOT NULL,
+
+    salario character varying NOT NULL,
+
+    crp character varying(20) NOT NULL
+);
+
+CREATE TABLE public.secretaria (
+
+    cpf character varying(11) NOT NULL,
+
+    nome character varying(50) NOT NULL,
+
+    rua character varying(50) NOT NULL,
+
+    cidade character varying(30) NOT NULL,
+
+    telefone character varying(15) NOT NULL,
+
+    salario character varying NOT NULL
+);
+
+CREATE SEQUENCE public.usuario_id_seq
+
+    START WITH 1
+
+    INCREMENT BY 1
+
+    NO MINVALUE
+
+    NO MAXVALUE
+
+    CACHE 1;
+
+CREATE TABLE public.usuario (
+
+    id integer DEFAULT nextval('public.usuario_id_seq'::regclass) NOT NULL,
+
+    perfil integer NOT NULL,
+
+    senha character varying,
+
+    cpf_secretaria character varying(11),
+
+    cpf_psicologo character varying(11)
+);
+
+ALTER TABLE ONLY public.consulta
+
+    ADD CONSTRAINT consulta_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY public.medicamento
+
+    ADD CONSTRAINT medicamento_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY public.paciente
+
+    ADD CONSTRAINT paciente_pkey PRIMARY KEY (cpf);
+
+ALTER TABLE ONLY public.psicologo
+
+    ADD CONSTRAINT psicologo_pkey PRIMARY KEY (cpf);
+
+ALTER TABLE ONLY public.secretaria
+
+    ADD CONSTRAINT secretaria_pkey PRIMARY KEY (cpf);
+
+ALTER TABLE ONLY public.usuario
+
+    ADD CONSTRAINT usuario_pkey PRIMARY KEY (id);
+
+
+ALTER TABLE ONLY public.medicamento
+
+    ADD CONSTRAINT cpf FOREIGN KEY (cpf_paciente) REFERENCES public.paciente(cpf);
+
+ALTER TABLE ONLY public.consulta
+
+    ADD CONSTRAINT cpf_paciente FOREIGN KEY (cpf_paciente) REFERENCES public.paciente(cpf);
+
+ALTER TABLE ONLY public.consulta
+
+    ADD CONSTRAINT cpf_psicologo FOREIGN KEY (cpf_psicologo) REFERENCES public.psicologo(cpf);
+
+ALTER TABLE ONLY public.consulta
+
+    ADD CONSTRAINT cpf_secretaria FOREIGN KEY (cpf_secretaria) REFERENCES public.secretaria(cpf);
+
+ALTER TABLE ONLY public.usuario
+
+    ADD CONSTRAINT cpf_secretaria FOREIGN KEY (cpf_secretaria) REFERENCES public.secretaria(cpf);
+
+ALTER TABLE ONLY public.usuario
+
+    ADD CONSTRAINT cpf_psicologo FOREIGN KEY (cpf_psicologo) REFERENCES public.psicologo(cpf);
+
+
+
+
+
+
+
+
+
+
+
+
