@@ -173,8 +173,31 @@ public class PatientDAO {
 			PreparedStatement prep = connection.prepareStatement(sql);
 			prep.execute();			
 			
-			deleteMedication(patient);
-			saveMedication(patient);
+//			deleteMedication(patient);
+//			saveMedication(patient);
+			
+			sql = "UPDATE medicamento "
+					+ "SET nome = '" + patient.getMedicamento1() + "', "
+					+ "dose = '" + patient.getDosagem1() + "' "
+					+ "WHERE cpf_paciente = '" + patient.getCpf() + "' AND id = ("
+					+ "SELECT id FROM medicamento " 
+					+ " WHERE cpf_paciente = '" + patient.getCpf() + "' " 
+					+ "	ORDER BY id ASC LIMIT 1);";
+			
+			prep = connection.prepareStatement(sql);
+			prep.execute();
+			
+			sql = "UPDATE medicamento "
+					+ "SET nome = '" + patient.getMedicamento2() + "', "
+					+ "dose = '" + patient.getDosagem2() + "' "
+					+ "WHERE cpf_paciente = '" + patient.getCpf() + "' AND id = ("  
+					+ "SELECT id FROM medicamento "  
+					+ " WHERE cpf_paciente = '" + patient.getCpf() + "' "  
+					+ "	ORDER BY id DESC LIMIT 1);";
+			
+			prep = connection.prepareStatement(sql);
+			prep.execute();
+			
 			
 			JOptionPane.showMessageDialog(null, "Paciente atualizado com sucesso!");
 		}catch (Exception e) {
@@ -186,8 +209,8 @@ public class PatientDAO {
 	public int medicationExist(String cpf) {
 		int lines = 0;
 		
-		String sql = "SELECT * FROM paciente "
-				+ "WHERE cpf LIKE '" + cpf + "';";
+		String sql = "SELECT * FROM medicamento "
+				+ "WHERE cpf_paciente LIKE '" + cpf + "';";
 		
 		
 		try {

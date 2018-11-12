@@ -2,9 +2,9 @@ package br.com.clinica.model;
 
 public class UserModel {
 	private int id;
-	private String perfil;
+	private static String perfil;
 	private String senha;
-	private String cpf;
+	private static String cpf;
 	
 	public int getId() {
 		return id;
@@ -14,7 +14,7 @@ public class UserModel {
 		this.id = id;
 	}
 	
-	public String getPerfil() {
+	public static String getPerfil() {
 		return perfil;
 	}
 	
@@ -30,7 +30,7 @@ public class UserModel {
 		this.senha = senha;
 	}
 	
-	public String getCpf() {
+	public static String getCpf() {
 		return cpf;
 	}
 	

@@ -11,6 +11,7 @@ import java.time.LocalTime;
 import javax.swing.JOptionPane;
 
 import br.com.clinica.model.QueryModel;
+import br.com.clinica.model.UserModel;
 
 
 public class QueryDAO {
@@ -68,16 +69,16 @@ public class QueryDAO {
 				prep.setTime(2, time);
 				prep.setString(3, query.getCpfPatient());
 				prep.setString(4, cpfPsycologist);
-				prep.setString(5, "5241");
+				prep.setString(5, UserModel.getCpf());
 
 				prep.execute();
 				return true;
 			}else {
-				JOptionPane.showMessageDialog(null, "O horário "+time+" , do psicólogo " +query.getNamePsycologist()+" não está disponível!");
+				JOptionPane.showMessageDialog(null, "O horï¿½rio "+time+" , do psicï¿½logo " +query.getNamePsycologist()+" nï¿½o estï¿½ disponï¿½vel!");
 				return false;
 			}				
 		}else {
-			JOptionPane.showMessageDialog(null, "Paciente não existe!");
+			JOptionPane.showMessageDialog(null, "Paciente nï¿½o existe!");
 			return false;
 		}
 	}

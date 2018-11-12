@@ -8,10 +8,10 @@ import java.util.Properties;
 public class ConnectionUtil {
 	
 	private static final String USER = "postgres";
-	private static final String PASSWORD = "123456";
+	private static final String PASSWORD = "23121996";
 	
 	public static Connection getConnection() throws SQLException {
-		String url = "jdbc:postgresql://localhost/Psicologia";
+		String url = "jdbc:postgresql://localhost:5433/Psicologia";
 		
 		Properties properties = new Properties();
 		properties.setProperty("user", USER);

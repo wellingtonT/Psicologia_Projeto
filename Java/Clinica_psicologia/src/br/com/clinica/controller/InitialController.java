@@ -37,11 +37,11 @@ public class InitialController {
 			e.printStackTrace();
 		}
 		
+		String nome = userDao.getName(UserModel.getPerfil(), UserModel.getCpf());
+		
+		template.setUserName(nome);
+		
 		this.frame = frame;
-		
-		String userName = userDao.getName(userModel);
-		
-		template.setUserName(userName);
 		
 		mudarConteudo(initialView, template);
 		buttonDefinition(this.frame);
@@ -51,7 +51,20 @@ public class InitialController {
 		initialView = new InitialView();	
 		template = new Template(2);
 		this.frame = frame;
+
+		try {
+			userDao = new UserDAO();
+		} catch (SQLException e) {
+			System.out.println("Erro ao iniciar userDAO");
+			e.printStackTrace();
+		} 
 		
+		String nome = userDao.getName(UserModel.getPerfil(), UserModel.getCpf());
+		
+		template.setUserName(nome);
+				
+		
+
 		mudarConteudo(initialView, template);
 		buttonDefinition(this.frame);
 	}

@@ -38,21 +38,21 @@ public class UserDAO {
 			}
 			
 		} catch (SQLException e) {
-			System.out.println("Erro na autenticação do usuário");
+			System.out.println("Erro na autenticaï¿½ï¿½o do usuï¿½rio");
 			e.printStackTrace();
 		}
 		return null;	
 	}
 	
-	public String getName(UserModel user) {
+	public String getName(String perfil, String cpf) {
 		String tabela;
 		String userName = null;
 		
-		if(user.getPerfil() == "1") tabela = "secretaria";
+		if(perfil == "1") tabela = "secretaria";
 		else tabela = "psicologo";
 		
 		String sql = "SELECT * FROM " + tabela + " "
-				+ "WHERE cpf LIKE '" + user.getCpf() + "';";
+				+ "WHERE cpf LIKE '" + cpf + "';";
 		
 		java.sql.Statement statement;
 		try {
@@ -66,7 +66,7 @@ public class UserDAO {
 			return userName;
 			
 		} catch (SQLException e) {
-			System.out.println("Erro ao pegar o nome do usuário");
+			System.out.println("Erro ao pegar o nome do usuï¿½rio");
 			e.printStackTrace();
 		}
 		return null;
