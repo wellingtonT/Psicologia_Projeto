@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
+import br.com.clinica.model.PatientModel;
 import br.com.clinica.model.PsycologistModel;
 
 
@@ -35,6 +38,27 @@ public class PsycologistDAO {
 		prep.execute();
 	}
 	
+	public void update(PsycologistModel psycologist) {
+		String sql = "UPDATE psicologo "
+				+ "SET nome = '" + psycologist.getNome() + "', "
+				+ "rua = '" + psycologist.getRua() + "', "
+				+ "cidade = '" + psycologist.getCidade() + "', "
+				+ "telefone = '" + psycologist.getTelefone() + "',"
+				+ "salario = '" + psycologist.getSalario() + "', "
+				+ "crp = '" + psycologist.getCrp() + "' "
+				+ "WHERE cpf = '" + psycologist.getCpf() + "';";
+		
+		try {
+			PreparedStatement prep = connection.prepareStatement(sql);
+			prep.execute();
+			
+			JOptionPane.showMessageDialog(null, "Psicólogo atualizado com sucesso!");
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Erro ao atualizar o psicólogo.");
+		}
+	
+	}
+	
 	public String cpfPsycologist(String name) {
 		String sql = "SELECT cpf FROM psicologo "
 				+ "WHERE nome LIKE '" + name + "';";
@@ -45,6 +69,44 @@ public class PsycologistDAO {
 			ResultSet resultSet = statement.executeQuery(sql);
 			resultSet.next();
 			return resultSet.getString(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+		
+	}
+	
+	public PsycologistModel getPeople(String cpf) {
+		PsycologistModel psycologistModel = new PsycologistModel();
+		
+		String sql = "SELECT * FROM psicologo "
+				+ "WHERE cpf LIKE '" + cpf + "';";
+		
+		
+		
+		try {
+			java.sql.Statement statement = connection.createStatement();
+			
+			ResultSet resultSet = statement.executeQuery(sql);
+			
+			resultSet.next();
+			
+			if(resultSet.getRow() > 0) {
+				psycologistModel.setNome(resultSet.getString("nome"));
+				psycologistModel.setCpf(resultSet.getString("cpf"));
+				psycologistModel.setRua(resultSet.getString("rua"));
+				psycologistModel.setCidade(resultSet.getString("cidade"));
+				psycologistModel.setTelefone(resultSet.getString("telefone"));
+				psycologistModel.setCrp(resultSet.getString("crp"));
+				psycologistModel.setSalario(resultSet.getString("salario"));
+				
+				return psycologistModel;
+				
+			}else {
+				return null;
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

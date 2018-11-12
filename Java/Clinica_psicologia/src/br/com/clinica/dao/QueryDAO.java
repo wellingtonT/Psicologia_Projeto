@@ -21,7 +21,7 @@ public class QueryDAO {
 		connection = ConnectionUtil.getConnection();
 	}
 	
-	public void save(QueryModel query) throws SQLException {
+	public boolean save(QueryModel query) throws SQLException {
 		PatientDAO patientDao = new PatientDAO();
 		PsycologistDAO psycologistDao = new PsycologistDAO();
 		
@@ -71,11 +71,14 @@ public class QueryDAO {
 				prep.setString(5, "5241");
 
 				prep.execute();
+				return true;
 			}else {
 				JOptionPane.showMessageDialog(null, "O horário "+time+" , do psicólogo " +query.getNamePsycologist()+" não está disponível!");
+				return false;
 			}				
 		}else {
 			JOptionPane.showMessageDialog(null, "Paciente não existe!");
+			return false;
 		}
 	}
 	

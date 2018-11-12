@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 import br.com.clinica.model.PatientModel;
 
 public class PatientDAO {
@@ -18,7 +20,7 @@ public class PatientDAO {
 	
 	public void save(PatientModel patient) throws SQLException {
 
-		String sql = "INSERT INTO paciente"
+		String sql = "INSERT INTO paciente "
 				+ " (CPF, NOME, RUA, CIDADE, TELEFONE)"
 				+" VALUES (?, ?, ?, ?, ?);";
 		
@@ -31,6 +33,50 @@ public class PatientDAO {
 		prep.setString(5, patient.getTelefone());
 		
 		prep.execute();
+	}
+	
+	public void saveMedication(PatientModel patient) {
+		String sql = "INSERT INTO medicamento "
+				+ " (NOME, DOSE, CPF_PACIENTE)"
+				+" VALUES (?, ?, ?);";
+		
+		
+		try {
+			PreparedStatement prep = connection.prepareStatement(sql);
+			
+			prep.setString(1, patient.getMedicamento1());
+			prep.setString(2, patient.getDosagem1());
+			prep.setString(3, patient.getCpf());
+			
+			prep.execute();
+			
+			prep.setString(1, patient.getMedicamento2());
+			prep.setString(2, patient.getDosagem2());
+			prep.setString(3, patient.getCpf());
+			
+			prep.execute();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void deleteMedication(PatientModel patient) {
+		String sql = "DELETE FROM medicamento "
+				+ "WHERE cpf_paciente = '" + patient.getCpf() + "';";
+		
+		
+		try {
+			PreparedStatement prep = connection.prepareStatement(sql);
+			
+			prep.execute();
+			
+		} catch (SQLException e) {
+			System.out.println("Erro ao deletar o medicamento.");
+			e.printStackTrace();
+		}
 	}
 	
 	public boolean existPatient(String cpf) throws SQLException {
@@ -46,6 +92,120 @@ public class PatientDAO {
 		if(resultSet.getRow() > 0) return true;
 		else return false;
 		
+	}
+	
+	public PatientModel getPeople(String cpf) {
+		PatientModel patientModel = new PatientModel();
+		
+		String sql = "SELECT * FROM paciente "
+				+ "WHERE cpf LIKE '" + cpf + "';";
+		
+		try {
+			java.sql.Statement statement = connection.createStatement();
+			
+			ResultSet resultSet = statement.executeQuery(sql);
+			
+			resultSet.next();
+			
+			if(resultSet.getRow() > 0) {
+				patientModel.setNome(resultSet.getString("nome"));
+				patientModel.setCpf(resultSet.getString("cpf"));
+				patientModel.setRua(resultSet.getString("rua"));
+				patientModel.setCidade(resultSet.getString("cidade"));
+				patientModel.setTelefone(resultSet.getString("telefone"));
+				
+				sql = "SELECT * FROM medicamento "
+						+ "WHERE cpf_paciente LIKE '" + patientModel.getCpf() +"';";
+				
+				resultSet = statement.executeQuery(sql);
+				
+				System.out.println("medicamento: " + medicationExist(cpf));
+				
+				if(medicationExist(cpf) == 1) {
+					resultSet.next();
+					
+					patientModel.setMedicamento1(resultSet.getString("nome"));
+					patientModel.setDosagem1(resultSet.getString("dose"));
+					
+					
+				}else {
+					if(medicationExist(cpf) == 2) {
+						resultSet.next();
+						
+						patientModel.setMedicamento1(resultSet.getString("nome"));
+						patientModel.setDosagem1(resultSet.getString("dose"));
+						
+						resultSet.next();
+						
+						patientModel.setMedicamento2(resultSet.getString("nome"));
+						patientModel.setDosagem2(resultSet.getString("dose"));
+						
+					}
+				}			
+				
+				return patientModel;
+				
+			}else {
+				return null;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+		
+	}
+
+	
+	public void update(PatientModel patient){
+		String sql = "UPDATE paciente "
+				+ "SET nome = '" + patient.getNome() + "', "
+				+ "rua = '" + patient.getRua() + "', "
+				+ "cidade = '" + patient.getCidade() + "', "
+				+ "telefone = '" + patient.getTelefone() + "' "
+				+ "WHERE cpf = '" + patient.getCpf() + "';";
+		
+		
+		
+		try {
+			PreparedStatement prep = connection.prepareStatement(sql);
+			prep.execute();			
+			
+			deleteMedication(patient);
+			saveMedication(patient);
+			
+			JOptionPane.showMessageDialog(null, "Paciente atualizado com sucesso!");
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Erro ao atualizar o paciente.");
+		}
+		
+	}
+	
+	public int medicationExist(String cpf) {
+		int lines = 0;
+		
+		String sql = "SELECT * FROM paciente "
+				+ "WHERE cpf LIKE '" + cpf + "';";
+		
+		
+		try {
+			java.sql.Statement statement = connection.createStatement();
+			
+			ResultSet resultSet = statement.executeQuery(sql);
+			
+			while(resultSet.next()) {
+				lines++;
+			}
+			
+			return lines;
+		} catch (SQLException e) {
+			System.out.println("Erro ao verificar medicamentos");
+			e.printStackTrace();
+		}
+		
+		return lines;		
 	}
 	
 }

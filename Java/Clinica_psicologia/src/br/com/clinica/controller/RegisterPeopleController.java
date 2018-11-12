@@ -3,6 +3,7 @@ package br.com.clinica.controller;
 import java.awt.Component;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import br.com.clinica.dao.PatientDAO;
@@ -60,9 +61,11 @@ public class RegisterPeopleController {
 			public void save() {
 				if(opt == 1) { //Se opt for 1 é MODIFICAR
 					switch(p1) {
-						case 1:
+						case 1: modifyPatient();
+								break;
+						case 3: modifyPsycologist();
+								break;
 						case 2:
-						case 3:
 					}
 				}else { //se opt for 2 é CADASTRAR
 					switch(p1) {
@@ -186,8 +189,71 @@ public class RegisterPeopleController {
 	}
 	
 	public void searchPeople() {
-		//IMPLEMENTAR
+		String cpf = registerPeopleView.getLocationField().getText();
+		
+		patientModel = patientDao.getPeople(cpf);
+		if(patientModel == null) {
+			psycologistModel = psycologistDao.getPeople(cpf);
+			if(psycologistModel == null) {
+				secretaryModel = secretaryDao.getPeople(cpf);
+				if(secretaryModel == null) {
+					JOptionPane.showMessageDialog(null, "CPF não encontrado!");
+				}else {
+					insertFields(secretaryModel);
+				}
+			}else {
+				insertFields(psycologistModel);
+			}
+		}else {
+			insertFields(patientModel);
+		}
+		
 	}
 	
+	public void insertFields(PatientModel patientModel){
+		registerPeopleView.getNameField().setText(patientModel.getNome());
+		registerPeopleView.getCpfField().setText(patientModel.getCpf());
+		registerPeopleView.getStreetField().setText(patientModel.getRua());
+		registerPeopleView.getCityField().setText(patientModel.getCidade());
+		registerPeopleView.getPhoneField().setText(patientModel.getTelefone());
+		registerPeopleView.getMedicationField1().setText(patientModel.getMedicamento1());
+		registerPeopleView.getDosageField1().setText(patientModel.getDosagem1());
+		registerPeopleView.getMedicationField2().setText(patientModel.getMedicamento2());
+		registerPeopleView.getDosageField2().setText(patientModel.getDosagem2());
+	}
+	
+	public void insertFields(PsycologistModel psycologistModel){
+		registerPeopleView.getNameField().setText(psycologistModel.getNome());
+		registerPeopleView.getCpfField().setText(psycologistModel.getCpf());
+		registerPeopleView.getStreetField().setText(psycologistModel.getRua());
+		registerPeopleView.getCityField().setText(psycologistModel.getCidade());
+		registerPeopleView.getPhoneField().setText(psycologistModel.getTelefone());
+		registerPeopleView.getCrpField().setText(psycologistModel.getCrp());
+		registerPeopleView.getSalaryField().setText(psycologistModel.getSalario());
+	}
+	
+	public void insertFields(SecretaryModel secretaryModel){
+		registerPeopleView.getNameField().setText(secretaryModel.getNome());
+		registerPeopleView.getCpfField().setText(secretaryModel.getCpf());
+		registerPeopleView.getStreetField().setText(secretaryModel.getRua());
+		registerPeopleView.getCityField().setText(secretaryModel.getCidade());
+		registerPeopleView.getPhoneField().setText(secretaryModel.getTelefone());
+		registerPeopleView.getSalaryField().setText(secretaryModel.getSalario());
+	}
+	
+	public void modifyPatient() {
+		getPatientFields();
+		
+
+		patientDao.update(patientModel);
+	
+	}
+	
+	public void modifyPsycologist() {
+		getPsycologistFields();
+		
+		psycologistDao.update(psycologistModel);
+		
+	}
 	
 }

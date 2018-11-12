@@ -94,7 +94,7 @@ public class RegisterQueryController {
 	
 	public void registerQuery() {
 		queryModel = new QueryModel();
-		
+		boolean save = false;
 		getFields();
 		
 //		System.out.println(queryModel.getCpfPatient());
@@ -105,13 +105,13 @@ public class RegisterQueryController {
 //		System.out.println(queryModel.getYear());		
 //		System.out.println(queryModel.getHour());
 		try {
-			queryDao.save(queryModel);
+			save = queryDao.save(queryModel);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		clearFields();
+		if(!save) clearFields();
 	}
 	
 	public void modifyQuery() {

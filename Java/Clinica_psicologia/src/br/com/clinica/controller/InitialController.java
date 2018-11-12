@@ -5,34 +5,55 @@ import java.sql.SQLException;
 
 import javax.swing.SwingUtilities;
 
+import br.com.clinica.dao.UserDAO;
+import br.com.clinica.listener.ExitButtonListener;
 import br.com.clinica.listener.InitialButtonsListener;
+import br.com.clinica.model.UserModel;
 import br.com.clinica.view.Frame;
 import br.com.clinica.view.InitialView;
-import br.com.clinica.view.ModifyView;
-import br.com.clinica.view.RegisterQueryView;
-import br.com.clinica.view.RegisterView;
 import br.com.clinica.view.Template;
-import br.com.clinica.view.Template2;
 
 public class InitialController {
 	
 	private InitialView initialView;
 	private Template template;
 	private Frame frame;
+	private UserModel userModel;
+	private UserDAO userDao;
 	
 	private RegisterController registerController;
 	private ModifyController modifyController;
 	private RegisterQueryController registerQueryController;
 	
+	public InitialController(Frame frame, UserModel user) {
+		initialView = new InitialView();	
+		template = new Template(2);
+		userModel = user;
+		
+		try {
+			userDao = new UserDAO();
+		} catch (SQLException e) {
+			System.out.println("Erro ao iniciar userDAO");
+			e.printStackTrace();
+		}
+		
+		this.frame = frame;
+		
+		String userName = userDao.getName(userModel);
+		
+		template.setUserName(userName);
+		
+		mudarConteudo(initialView, template);
+		buttonDefinition(this.frame);
+	}
+	
 	public InitialController(Frame frame) {
 		initialView = new InitialView();	
 		template = new Template(2);
-		
 		this.frame = frame;
-
+		
 		mudarConteudo(initialView, template);
 		buttonDefinition(this.frame);
-		
 	}
 	
 	public void mudarConteudo(Component conteudo, Component template) {
@@ -69,6 +90,14 @@ public class InitialController {
 			@Override
 			public void modifyPeopleButton() {
 				modifyController = new ModifyController(frame,3);
+			}
+		});
+		
+		template.setListener(new ExitButtonListener() {
+			
+			@Override
+			public void exit() {
+				LoginController loginController = new LoginController(frame);				
 			}
 		});
 	}

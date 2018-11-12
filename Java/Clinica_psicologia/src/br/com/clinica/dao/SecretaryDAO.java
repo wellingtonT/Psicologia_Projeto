@@ -2,6 +2,7 @@ package br.com.clinica.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import br.com.clinica.model.PsycologistModel;
@@ -31,6 +32,44 @@ public class SecretaryDAO {
 		prep.setString(6, secretary.getSalario());
 		
 		prep.execute();
+	}
+	
+	public SecretaryModel getPeople(String cpf) {
+		SecretaryModel secretaryModel = new SecretaryModel();
+		
+		String sql = "SELECT * FROM secretaria "
+				+ "WHERE cpf LIKE '" + cpf + "';";
+		
+		
+		
+		try {
+			java.sql.Statement statement = connection.createStatement();
+			
+			ResultSet resultSet = statement.executeQuery(sql);
+			
+			resultSet.next();
+			
+			if(resultSet.getRow() > 0) {
+				secretaryModel.setNome(resultSet.getString("nome"));
+				secretaryModel.setCpf(resultSet.getString("cpf"));
+				secretaryModel.setRua(resultSet.getString("rua"));
+				secretaryModel.setCidade(resultSet.getString("cidade"));
+				secretaryModel.setTelefone(resultSet.getString("telefone"));
+				secretaryModel.setSalario(resultSet.getString("salario"));
+				
+				return secretaryModel;
+				
+			}else {
+				return null;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+		
 	}
 	
 }
