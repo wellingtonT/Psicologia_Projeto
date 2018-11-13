@@ -1,6 +1,5 @@
 package br.com.clinica.controller;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.sql.SQLException;
 
@@ -54,12 +53,12 @@ public class RegisterPeopleController {
 		SwingUtilities.updateComponentTreeUI(frame);
 	}
 	
-	public void buttonDefinition(Frame frame, int opt,int p1) { //P1 1-Paciente 2- Psicólogo 3- Secretária
+	public void buttonDefinition(Frame frame, int opt,int p1) { //P1 1-Paciente 2- Psicï¿½logo 3- Secretï¿½ria
 		registerPeopleView.setListener(new SelectButtonsListener() {
 			
 			@Override
 			public void save() {
-				if(opt == 1) { //Se opt for 1 é MODIFICAR
+				if(opt == 1) { //Se opt for 1 ï¿½ MODIFICAR
 					switch(p1) {
 						case 1: modifyPatient();
 								break;
@@ -67,7 +66,7 @@ public class RegisterPeopleController {
 								break;
 						case 2:
 					}
-				}else { //se opt for 2 é CADASTRAR
+				}else { //se opt for 2 ï¿½ CADASTRAR
 					switch(p1) {
 						case 1: registerPatient();
 								break;
@@ -157,14 +156,29 @@ public class RegisterPeopleController {
 		psycologistModel = new PsycologistModel();
 		
 		getPsycologistFields();
-		
-		try {
-			psycologistDao.save(psycologistModel);
-			clearFields();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if(verificationPsycologist()) {
+			try {
+				psycologistDao.save(psycologistModel);
+				clearFields();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}else {
+			JOptionPane.showMessageDialog(null, "HÃ¡ algum campo em branco, favor preencher.");
 		}
 		
+		
+	}
+	
+	public boolean verificationPsycologist() {
+		if(psycologistModel.getNome().equals("")) return false;
+		if(psycologistModel.getCpf().equals("")) return false;
+		if(psycologistModel.getRua().equals("")) return false;
+		if(psycologistModel.getCidade().equals("")) return false;
+		if(psycologistModel.getTelefone().equals("")) return false;
+		if(psycologistModel.getSalario().equals("")) return false;
+		if(psycologistModel.getCrp().equals("")) return false;
+		return true;
 	}
 	
 	public void getSecretaryFields() {
@@ -180,13 +194,28 @@ public class RegisterPeopleController {
 		secretaryModel = new SecretaryModel();
 		
 		getSecretaryFields();
-		
-		try {
-			secretaryDao.save(secretaryModel);
-			clearFields();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if(verificationSecretary()) {
+			try {
+				secretaryDao.save(secretaryModel);
+				clearFields();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}else {
+			JOptionPane.showMessageDialog(null, "HÃ¡ algum campo em branco, favor preencher.");
 		}
+		
+		
+	}
+	
+	public boolean verificationSecretary() {
+		if(secretaryModel.getNome().equals("")) return false;
+		if(secretaryModel.getCpf().equals("")) return false;
+		if(secretaryModel.getRua().equals("")) return false;
+		if(secretaryModel.getCidade().equals("")) return false;
+		if(secretaryModel.getTelefone().equals("")) return false;
+		if(secretaryModel.getSalario().equals("")) return false;
+		return true;
 	}
 	
 	public void searchPeople() {
@@ -198,7 +227,7 @@ public class RegisterPeopleController {
 			if(psycologistModel == null) {
 				secretaryModel = secretaryDao.getPeople(cpf);
 				if(secretaryModel == null) {
-					JOptionPane.showMessageDialog(null, "CPF não encontrado!");
+					JOptionPane.showMessageDialog(null, "CPF nï¿½o encontrado!");
 				}else {
 					insertFields(secretaryModel);
 				}
@@ -246,7 +275,12 @@ public class RegisterPeopleController {
 		getPatientFields();
 		
 
-		patientDao.update(patientModel);
+		try{
+			patientDao.update(patientModel);
+			clearFields();
+		}catch (Exception e) {
+			
+		}
 	
 	}
 	

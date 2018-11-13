@@ -34,6 +34,7 @@ public class PatientDAO {
 			prep.setString(5, patient.getTelefone());
 			
 			prep.execute();
+			saveMedication(patient);
 			JOptionPane.showMessageDialog(null, "Paciente cadastrado com sucesso!");
 		}catch(SQLException e) {
 			JOptionPane.showMessageDialog(null, "Erro ao cadastrar paciente.");

@@ -3,6 +3,7 @@ package br.com.clinica.controller;
 import java.awt.Component;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import br.com.clinica.dao.PsycologistDAO;
@@ -105,12 +106,14 @@ public class RegisterQueryController {
 		
 		try {
 			save = queryDao.save(queryModel);
+			clearFields();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		if(!save) clearFields();
+		
+		
 	}
 	
 	public void modifyQuery() {
@@ -149,7 +152,7 @@ public class RegisterQueryController {
 					break;
 			case "2": dateMonth = "Fevereiro";
 					break;
-			case "3": dateMonth = "Março";
+			case "3": dateMonth = "Marï¿½o";
 					break;
 			case "4": dateMonth = "Abril";
 					break;

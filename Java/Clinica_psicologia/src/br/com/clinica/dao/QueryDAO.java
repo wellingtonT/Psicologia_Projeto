@@ -74,7 +74,7 @@ public class QueryDAO {
 				prep.setString(5, UserModel.getCpf());
 
 				prep.execute();
-				
+				JOptionPane.showMessageDialog(null, "Consulta cadastrada com sucesso!");
 				return true;
 			}else {
 				JOptionPane.showMessageDialog(null, "O hor�rio "+time+" , do psic�logo " +query.getNamePsycologist()+" n�o est� dispon�vel!");
