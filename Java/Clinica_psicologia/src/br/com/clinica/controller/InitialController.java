@@ -33,7 +33,6 @@ public class InitialController {
 		try {
 			userDao = new UserDAO();
 		} catch (SQLException e) {
-			System.out.println("Erro ao iniciar userDAO");
 			e.printStackTrace();
 		}
 		
@@ -92,7 +91,7 @@ public class InitialController {
 			
 			@Override
 			public void registerPeopleButton() {
-				registerController = new RegisterController(frame,3);
+				registerController = new RegisterController(frame,Integer.parseInt(userModel.getPerfil()));
 			}
 			
 			@Override
@@ -102,7 +101,7 @@ public class InitialController {
 			
 			@Override
 			public void modifyPeopleButton() {
-				modifyController = new ModifyController(frame,3);
+				modifyController = new ModifyController(frame,Integer.parseInt(userModel.getPerfil()));
 			}
 		});
 		

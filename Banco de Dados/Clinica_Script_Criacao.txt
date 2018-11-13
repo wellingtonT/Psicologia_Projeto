@@ -167,8 +167,11 @@ ALTER TABLE ONLY public.usuario
 
     ADD CONSTRAINT cpf_psicologo FOREIGN KEY (cpf_psicologo) REFERENCES public.psicologo(cpf);
 
+INSERT INTO public.psicologo (cpf, nome, rua, cidade, telefone, salario, crp)
+    VALUES ('123456789', 'Gerente', 'x', 'x', 'x', '0', 'x');
 
-
+INSERT INTO public.usuario (perfil, senha, cpf_psicologo)
+    VALUES ('3', '123456', '123456789');
 
 
 

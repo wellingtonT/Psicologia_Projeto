@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 
 import br.com.clinica.listener.EnterButtonListener;
 import br.com.clinica.listener.InitialButtonsListener;
+import br.com.clinica.model.UserModel;
 
 public class InitialView extends JPanel{
 	
@@ -72,19 +73,21 @@ public class InitialView extends JPanel{
 		this.add(modifyPeopleButton, gbc);
 		
 		
-		gbc.gridx = 2;
-		
-		redimensionarImagem(registerQueryButton, imgConsultas);
-		setActionButton(registerQueryButton, 3);
-		this.add(registerQueryButton, gbc);
-		
-		
-		gbc.gridx = 3;
-		
-		redimensionarImagem(modifyQueryButton, imgModificarConsultas);
-		setActionButton(modifyQueryButton, 4);
-		this.add(modifyQueryButton, gbc);
-		
+		if(Integer.parseInt(UserModel.getPerfil()) == 1) {
+			
+			gbc.gridx = 2;
+			
+			redimensionarImagem(registerQueryButton, imgConsultas);
+			setActionButton(registerQueryButton, 3);
+			this.add(registerQueryButton, gbc);
+			
+			
+			gbc.gridx = 3;
+			
+			redimensionarImagem(modifyQueryButton, imgModificarConsultas);
+			setActionButton(modifyQueryButton, 4);
+			this.add(modifyQueryButton, gbc);
+		}
 		
 		gbc.gridx = 0;
 		gbc.gridy = 1;
@@ -100,15 +103,18 @@ public class InitialView extends JPanel{
 		setFont(modifyPeopleText);
 		this.add(modifyPeopleText, gbc);
 		
-		gbc.gridx = 2;
+		if(Integer.parseInt(UserModel.getPerfil()) == 1) {
+			gbc.gridx = 2;
+			
+			setFont(registerQueryText);
+			this.add(registerQueryText, gbc);
+			
+			gbc.gridx = 3;
+			
+			setFont(modifyQueryText);
+			this.add(modifyQueryText, gbc);
+		}
 		
-		setFont(registerQueryText);
-		this.add(registerQueryText, gbc);
-		
-		gbc.gridx = 3;
-		
-		setFont(modifyQueryText);
-		this.add(modifyQueryText, gbc);
 		
 		
 		gbc.gridheight = 1;

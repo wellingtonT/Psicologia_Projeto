@@ -5,10 +5,13 @@ import java.sql.SQLException;
 
 import javax.swing.SwingUtilities;
 
+import br.com.clinica.dao.PsycologistDAO;
 import br.com.clinica.dao.QueryDAO;
 import br.com.clinica.listener.SearchButtonListener;
 import br.com.clinica.listener.SelectButtonsListener;
+import br.com.clinica.model.PsycologistModel;
 import br.com.clinica.model.QueryModel;
+import br.com.clinica.model.UserModel;
 import br.com.clinica.view.Frame;
 import br.com.clinica.view.RegisterQueryView;
 
@@ -20,15 +23,19 @@ public class RegisterQueryController {
 
 	private QueryDAO queryDao;
 	private QueryModel queryModel;
+	private PsycologistModel psycologistModel;
+	private PsycologistDAO psycologistDao;
 	
 	private InitialController initialController;
 	
 	public RegisterQueryController(Frame frame, int opt) throws SQLException {
 		registerQueryView = new RegisterQueryView(opt);
 		queryDao = new QueryDAO();
-		
+		psycologistDao = new PsycologistDAO();
+				
 		this.frame = frame;
 		
+		setPsycologists();
 		mudarConteudo(registerQueryView);
 		
 		buttonDefinition(this.frame,opt);
@@ -52,7 +59,6 @@ public class RegisterQueryController {
 				}else { //se opt for 1 ï¿½ CADASTRAR
 					registerQuery();
 				}
-				System.out.println("Salvo!");
 			}
 			
 			@Override
@@ -97,13 +103,6 @@ public class RegisterQueryController {
 		boolean save = false;
 		getFields();
 		
-//		System.out.println(queryModel.getCpfPatient());
-//		System.out.println(queryModel.getCpfPsycologist());
-//		System.out.println(queryModel.getCpfSecretary());
-//		System.out.println(queryModel.getDay());
-//		System.out.println(queryModel.getMonth());
-//		System.out.println(queryModel.getYear());		
-//		System.out.println(queryModel.getHour());
 		try {
 			save = queryDao.save(queryModel);
 		} catch (SQLException e) {
@@ -119,12 +118,66 @@ public class RegisterQueryController {
 		
 		getFields();
 		
+		queryDao.update(queryModel);
+		
 		clearFields();		
 	}
 	
 	public void searchQuery() {
 		queryModel = new QueryModel();
+		psycologistModel = new PsycologistModel();
 		
-//		registerQueryView.getPsycologistBox().setSelectedItem("Teste3");
+		String cpf = registerQueryView.getLocationField().getText();
+		
+		queryModel = queryDao.getQuery(cpf);
+		
+		psycologistModel = psycologistDao.getPeople(queryModel.getNamePsycologist());		
+		
+		registerQueryView.getCpfField().setText(queryModel.getCpfPatient());
+		registerQueryView.getDayField().setText(queryModel.getDay());
+		registerQueryView.getYearField().setText(queryModel.getYear());
+		registerQueryView.getPsycologistBox().setSelectedItem(psycologistModel.getNome());
+		registerQueryView.getHourBox().setSelectedItem(queryModel.getHour());
+		registerQueryView.getMonthBox().setSelectedItem(getMonth(queryModel.getMonth()));		
+	}
+	
+	public String getMonth(String month) {
+		String dateMonth = null;
+		
+		switch(month) {
+			case "1": dateMonth = "Janeiro";
+					break;
+			case "2": dateMonth = "Fevereiro";
+					break;
+			case "3": dateMonth = "Março";
+					break;
+			case "4": dateMonth = "Abril";
+					break;
+			case "5": dateMonth = "Maio";
+					break;
+			case "6": dateMonth = "Junho";
+					break;
+			case "7": dateMonth = "Julho";
+					break;
+			case "8": dateMonth = "Agosto";
+					break;
+			case "9": dateMonth = "Setembro";
+					break;
+			case "10": dateMonth = "Outubro";
+					break;
+			case "11": dateMonth = "Novembro";
+					break;
+			case "12": dateMonth = "Dezembro";
+		}
+		
+		return dateMonth;
+	}
+	
+	public void setPsycologists(){
+		String names[] = null;
+		names = psycologistDao.getAllPsycologistsName();
+		
+		registerQueryView.setPsycologists(names);
+		
 	}
 }

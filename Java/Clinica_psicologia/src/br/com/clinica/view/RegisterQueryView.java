@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -38,21 +39,21 @@ public class RegisterQueryView extends JPanel {
 	private JTextField cpfField = new JTextField(20);	
 	
 	private JLabel psycologistText = new JLabel("Psicólogo: ");
-	private String[] psycologists = {"Teste1", "Teste2", "Teste3"};
-	private JComboBox psycologistBox = new JComboBox(psycologists);
+	private String[] psycologists = {};
+	private JComboBox psycologistBox = new JComboBox();
 	
 	private JLabel dayText = new JLabel("Dia: ");
 	private JTextField dayField = new JTextField(5);
 	
 	private JLabel monthText = new JLabel("Mês: ");
-	private String[] months = {"Janeiro", "Fevereiro", "Março"};
+	private String[] months = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"};
 	private JComboBox monthBox = new JComboBox(months);
 	
 	private JLabel yearText = new JLabel("Ano: ");
 	private JTextField yearField = new JTextField(5);
 	
 	private JLabel hourText = new JLabel("Horário: ");
-	private String[] hours = {"10:00","11:00","12:00","14:00","15:00"};
+	private String[] hours = {"10:00:00","11:00:00","12:00:00","14:00:00","15:00:00","16:00:00","17:00:00","18:00:00"};
 	private JComboBox hourBox = new JComboBox(hours);
 	
 	private ImageIcon imgClear = new ImageIcon(getClass().getResource(caminho + "Limpar.png"));
@@ -222,7 +223,15 @@ public class RegisterQueryView extends JPanel {
 		
 	}
 	
-	
+	public String[] getPsycologists() {
+		return psycologists;
+	}
+
+	public void setPsycologists(String[] psycologists) {
+		this.psycologists = psycologists;
+		psycologistBox.setModel(new DefaultComboBoxModel<>(this.psycologists));
+	}
+
 	public void addComponentsDataButtons(JPanel panel) {
 		
 		panel.setLayout(new GridBagLayout());

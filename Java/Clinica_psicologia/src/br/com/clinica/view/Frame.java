@@ -3,6 +3,8 @@ package br.com.clinica.view;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -42,7 +44,6 @@ public class Frame extends JFrame {
 	
 	public void setTemplate(JPanel t) {
 		this.template = t;
-		
 	}
 	
 	public void setConteudo(JPanel conteudo) {

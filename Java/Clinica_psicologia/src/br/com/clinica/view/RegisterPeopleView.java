@@ -359,9 +359,11 @@ public class RegisterPeopleView extends JPanel{
 		gbc.gridy = 0;
 		gbc.insets = new Insets(1,1,1,10);
 		
-		redimensionarImagem(clearButton,imgClear);
-		addActionClearButton();
-		panel.add(clearButton, gbc);
+		if(modelo == 2) {
+			redimensionarImagem(clearButton,imgClear);
+			addActionClearButton();
+			panel.add(clearButton, gbc);
+		}
 		
 		gbc.gridx = 1;
 		

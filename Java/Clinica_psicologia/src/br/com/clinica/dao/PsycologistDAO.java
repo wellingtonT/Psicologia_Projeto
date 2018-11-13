@@ -4,11 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import br.com.clinica.model.PatientModel;
 import br.com.clinica.model.PsycologistModel;
+import br.com.clinica.model.SecretaryModel;
 
 
 public class PsycologistDAO {
@@ -20,22 +22,44 @@ public class PsycologistDAO {
 	}
 	
 	public void save(PsycologistModel psycologist) throws SQLException {
-
-		String sql = "INSERT INTO psicologo"
-				+ " (CPF, NOME, RUA, CIDADE, TELEFONE, SALARIO, CRP)"
-				+ " VALUES (?, ?, ?, ?, ?, ?, ?);";
-		
-		PreparedStatement prep = connection.prepareStatement(sql);
-		
-		prep.setString(1, psycologist.getCpf());
-		prep.setString(2, psycologist.getNome());
-		prep.setString(3, psycologist.getRua());
-		prep.setString(4, psycologist.getCidade());
-		prep.setString(5, psycologist.getTelefone());
-		prep.setString(6, psycologist.getSalario());
-		prep.setString(7, psycologist.getCrp());
-		
-		prep.execute();
+		try {
+			String sql = "INSERT INTO psicologo"
+					+ " (CPF, NOME, RUA, CIDADE, TELEFONE, SALARIO, CRP)"
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?);";
+			
+			PreparedStatement prep = connection.prepareStatement(sql);
+			
+			prep.setString(1, psycologist.getCpf());
+			prep.setString(2, psycologist.getNome());
+			prep.setString(3, psycologist.getRua());
+			prep.setString(4, psycologist.getCidade());
+			prep.setString(5, psycologist.getTelefone());
+			prep.setString(6, psycologist.getSalario());
+			prep.setString(7, psycologist.getCrp());
+			
+			prep.execute();
+			
+			createUser(psycologist);
+			
+			JOptionPane.showMessageDialog(null, "Psicólogo cadastrado com sucesso! Senha: 123456");
+		}catch(SQLException e) {
+			JOptionPane.showMessageDialog(null, "Erro ao cadastrar psicólogo!");
+		}
+			
+	}
+	
+	public void createUser(PsycologistModel psycologist) {
+		try {
+			String sql = "INSERT INTO usuario "
+					+ " (perfil, senha, cpf_psicologo) "
+					+ " VALUES ('" + 2 +"', '" + 123456 + "', '" + psycologist.getCpf() + "');";
+			
+			PreparedStatement prep = connection.prepareStatement(sql);
+			
+			prep.execute();
+		}catch(SQLException e) {
+			
+		}
 	}
 	
 	public void update(PsycologistModel psycologist) {
@@ -67,8 +91,9 @@ public class PsycologistDAO {
 		try {
 			statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(sql);
-			resultSet.next();
-			return resultSet.getString(1);
+			while(resultSet.next()) {
+				return resultSet.getString(1);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -115,4 +140,37 @@ public class PsycologistDAO {
 		
 	}
 	
+	public String[] getAllPsycologistsName() {
+		String names[] = null;
+		ArrayList<String> list = new ArrayList<>();
+		int i = 0;
+		
+		String sql = "SELECT * FROM psicologo WHERE nome <> 'Gerente'";
+		
+				
+		try {
+			java.sql.Statement statement = connection.createStatement();
+			
+			ResultSet resultSet = statement.executeQuery(sql);
+			
+			while(resultSet.next()) {
+				list.add(resultSet.getString("nome"));
+			}
+			
+			names = new String[list.size()];
+			
+			for (String string : list) {
+				names[i] = string;
+				i++;
+			}
+			
+			
+			return names;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
+	
+

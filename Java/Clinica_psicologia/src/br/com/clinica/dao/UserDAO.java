@@ -48,12 +48,12 @@ public class UserDAO {
 		String tabela;
 		String userName = null;
 		
-		if(perfil == "1") tabela = "secretaria";
+		if(Integer.parseInt(perfil) == 1) tabela = "secretaria";
 		else tabela = "psicologo";
 		
 		String sql = "SELECT * FROM " + tabela + " "
 				+ "WHERE cpf LIKE '" + cpf + "';";
-		
+				
 		java.sql.Statement statement;
 		try {
 			statement = connection.createStatement();

@@ -1,5 +1,6 @@
 package br.com.clinica.controller;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.sql.SQLException;
 
@@ -50,7 +51,6 @@ public class RegisterPeopleController {
 		frame.getConteudo().removeAll();
 		frame.getConteudo().add(conteudo);
 		frame.getConteudo().revalidate();
-
 		SwingUtilities.updateComponentTreeUI(frame);
 	}
 	
@@ -133,14 +133,14 @@ public class RegisterPeopleController {
 		
 		getPatientFields();
 		
-//		patientDao.save(patientModel);
 		try {
 			patientDao.save(patientModel);
+			clearFields();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		clearFields();
+		
 	}
 	
 	public void getPsycologistFields() {
@@ -160,10 +160,11 @@ public class RegisterPeopleController {
 		
 		try {
 			psycologistDao.save(psycologistModel);
+			clearFields();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		clearFields();
+		
 	}
 	
 	public void getSecretaryFields() {
@@ -182,10 +183,10 @@ public class RegisterPeopleController {
 		
 		try {
 			secretaryDao.save(secretaryModel);
+			clearFields();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		clearFields();
 	}
 	
 	public void searchPeople() {
@@ -253,7 +254,12 @@ public class RegisterPeopleController {
 		getPsycologistFields();
 		
 		psycologistDao.update(psycologistModel);
+	}
+	
+	public void modifySecretary() {
+		getSecretaryFields();
 		
+		secretaryDao.update(secretaryModel);
 	}
 	
 }
