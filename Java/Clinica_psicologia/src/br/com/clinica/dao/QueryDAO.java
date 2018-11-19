@@ -147,7 +147,7 @@ public class QueryDAO {
 			
 			
 		}catch(SQLException e) {
-			System.out.println("Erro ao pegar consulta");
+
 		}
 		return null;
 		
@@ -198,12 +198,6 @@ public class QueryDAO {
 				+ "SELECT MAX(ID) FROM consulta " 
 				+ "WHERE cpf_paciente = '" + query.getCpfPatient() + "' "  
 				+ ");";
-		
-		System.out.println("Data: " + date);
-		System.out.println("Hora: " + time);
-		System.out.println("Cpf Paciente " + query.getCpfPatient());
-		System.out.println("Cof psicologo " + cpfPsycologist);
-		System.out.println("cpf secretaria "+ query.getCpfSecretary());
 		
 		try {
 			PreparedStatement prep = connection.prepareStatement(sql);

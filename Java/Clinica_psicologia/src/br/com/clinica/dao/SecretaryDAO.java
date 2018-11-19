@@ -59,9 +59,6 @@ public class SecretaryDAO {
 			
 			PreparedStatement prep = connection.prepareStatement(sql);
 			
-			System.out.println(sql);
-			System.out.println(secretary.getCpf());
-			
 			prep.execute();
 		}catch(SQLException e) {
 		}

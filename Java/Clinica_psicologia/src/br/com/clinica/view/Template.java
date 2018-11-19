@@ -72,11 +72,7 @@ public class Template extends JPanel {
 			case 2: addExitButton();
 					addUserName();
 					break;
-					
-			default: System.out.println("Erro ao iniciar bot�o!");
 		}
-		
-		//this.validate();
 		
 	}
 

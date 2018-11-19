@@ -38,7 +38,6 @@ public class UserDAO {
 			}
 			
 		} catch (SQLException e) {
-			System.out.println("Erro na autentica��o do usu�rio");
 			e.printStackTrace();
 		}
 		return null;	
@@ -66,7 +65,6 @@ public class UserDAO {
 			return userName;
 			
 		} catch (SQLException e) {
-			System.out.println("Erro ao pegar o nome do usu�rio");
 			e.printStackTrace();
 		}
 		return null;

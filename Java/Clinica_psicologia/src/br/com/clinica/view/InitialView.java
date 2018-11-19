@@ -158,8 +158,6 @@ public class InitialView extends JPanel{
 			case 4:
 				setActionModifyQuery(button);
 				break;
-			default:
-				System.out.println("Valor ou bot�o inv�lido!");
 		}
 	}
 	

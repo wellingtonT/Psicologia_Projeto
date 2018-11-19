@@ -54,7 +54,6 @@ public class InitialController {
 		try {
 			userDao = new UserDAO();
 		} catch (SQLException e) {
-			System.out.println("Erro ao iniciar userDAO");
 			e.printStackTrace();
 		} 
 		

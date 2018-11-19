@@ -141,8 +141,6 @@ public class ModifyView extends JPanel{
 			case 4:
 				backButton(button);
 				break;
-			default:
-				System.out.println("Erro ao registrar nos botões");
 		}
 	}	
 	

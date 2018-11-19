@@ -17,7 +17,6 @@ public class Frame extends JFrame {
     private JPanel template;
     
 	public Frame() {
-//		this.setExtendedState(JFrame.MAXIMIZED_BOTH); //Abrir na tela cheia
 		this.setSize(new Dimension(901,501));
 		this.setMinimumSize(new Dimension(900,500));
 		this.setTitle("Cl�nica Amaranto");
