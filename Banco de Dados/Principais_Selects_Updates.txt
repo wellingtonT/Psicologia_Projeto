@@ -1,0 +1,29 @@
+UPDATE medicamento
+SET nome = patient.getMedicamento1(),
+dose = patient.getDosagem1()
+WHERE cpf_paciente = patient.getCpf() AND id = (SELECT id FROM medicamento 
+						WHERE cpf_paciente = patient.getCpf() 
+						ORDER BY id ASC LIMIT 1);
+----------------------------------------------------------------------------------------------
+
+SELECT * FROM psicologo WHERE nome <> 'Gerente'
+----------------------------------------------------------------------------------------------
+
+SELECT cpf FROM psicologo WHERE nome LIKE name
+----------------------------------------------------------------------------------------------
+
+SELECT * FROM consulta WHERE data_agendada::date = date 
+AND hora_agendada = time 
+AND cpf_psicologo LIKE cpf;
+----------------------------------------------------------------------------------------------
+
+SELECT * FROM consulta WHERE cpf_paciente = cpf AND id = (SELECT MAX(ID) FROM consulta  
+							WHERE cpf_paciente = cpf);
+----------------------------------------------------------------------------------------------
+
+UPDATE consulta
+SET data_agendada = date, hora_agendada = time, cpf_paciente = query.getCpfPatient(),
+	cpf_psicologo = cpfPsycologist,
+	cpf_secretaria = UserModel.getCpf()
+WHERE cpf_paciente = query.getCpfPatient() AND id = (SELECT MAX(ID) FROM consulta 
+						WHERE cpf_paciente = query.getCpfPatient());
