@@ -18,31 +18,36 @@ public class SecretaryDAO {
 		connection = ConnectionUtil.getConnection();
 	}
 	
-	public void save(SecretaryModel secretary) throws SQLException {
+	public boolean save(SecretaryModel secretary) throws SQLException {
 
-		try {
-			String sql = "INSERT INTO secretaria "
-					+ " (CPF, NOME, RUA, CIDADE, TELEFONE, SALARIO)"
-					+ " VALUES (?, ?, ?, ?, ?, ?);";
-			
-			PreparedStatement prep = connection.prepareStatement(sql);
-			
-			prep.setString(1, secretary.getCpf());
-			prep.setString(2, secretary.getNome());
-			prep.setString(3, secretary.getRua());
-			prep.setString(4, secretary.getCidade());
-			prep.setString(5, secretary.getTelefone());
-			prep.setString(6, secretary.getSalario());
-			
-			prep.execute();
-			
-			createUser(secretary);
-			JOptionPane.showMessageDialog(null, "Secretária cadastrada com sucesso! Senha: 123456");
-		}catch(SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro ao cadastrar secretária.");
+		if(!existSecretary(secretary.getCpf())) {
+			try {
+				String sql = "INSERT INTO secretaria "
+						+ " (CPF, NOME, RUA, CIDADE, TELEFONE, SALARIO)"
+						+ " VALUES (?, ?, ?, ?, ?, ?);";
+				
+				PreparedStatement prep = connection.prepareStatement(sql);
+				
+				prep.setString(1, secretary.getCpf());
+				prep.setString(2, secretary.getNome());
+				prep.setString(3, secretary.getRua());
+				prep.setString(4, secretary.getCidade());
+				prep.setString(5, secretary.getTelefone());
+				prep.setString(6, secretary.getSalario());
+				
+				prep.execute();
+				
+				createUser(secretary);
+				JOptionPane.showMessageDialog(null, "Secretária cadastrada com sucesso! Senha: 123456");
+				return true;
+			}catch(SQLException e) {
+				JOptionPane.showMessageDialog(null, "Erro ao cadastrar secretária.");
+				return false;
+			}			
+		}else {
+			JOptionPane.showMessageDialog(null, "Secretária já existe!");
+			return false;
 		}
-		
-		
 		
 	}
 	
@@ -67,9 +72,7 @@ public class SecretaryDAO {
 		
 		String sql = "SELECT * FROM secretaria "
 				+ "WHERE cpf LIKE '" + cpf + "';";
-		
-		
-		
+
 		try {
 			java.sql.Statement statement = connection.createStatement();
 			
@@ -92,11 +95,25 @@ public class SecretaryDAO {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		return null;
+		
+	}
+	
+	public boolean existSecretary(String cpf) throws SQLException {
+		String sql = "SELECT * FROM secretaria "
+				+ "WHERE cpf LIKE '" + cpf + "';";
+		
+		java.sql.Statement statement = connection.createStatement();
+		
+		ResultSet resultSet = statement.executeQuery(sql);
+		
+		resultSet.next();
+		
+		if(resultSet.getRow() > 0) return true;
+		else return false;
 		
 	}
 	

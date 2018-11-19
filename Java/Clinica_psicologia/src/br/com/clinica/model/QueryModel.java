@@ -21,7 +21,7 @@ public class QueryModel {
 		return namePsycologist;
 	}
 	
-	public void setCpfPsycologist(String cpfPsycologist) {
+	public void setNamePsycologist(String cpfPsycologist) {
 		this.namePsycologist = cpfPsycologist;
 	}
 	

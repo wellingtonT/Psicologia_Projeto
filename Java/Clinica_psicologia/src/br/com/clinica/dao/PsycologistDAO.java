@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import br.com.clinica.controller.RegisterPeopleController;
 import br.com.clinica.model.PatientModel;
 import br.com.clinica.model.PsycologistModel;
 import br.com.clinica.model.SecretaryModel;
@@ -21,29 +22,40 @@ public class PsycologistDAO {
 		connection = ConnectionUtil.getConnection();
 	}
 	
-	public void save(PsycologistModel psycologist) throws SQLException {
-		try {
-			String sql = "INSERT INTO psicologo"
-					+ " (CPF, NOME, RUA, CIDADE, TELEFONE, SALARIO, CRP)"
-					+ " VALUES (?, ?, ?, ?, ?, ?, ?);";
-			
-			PreparedStatement prep = connection.prepareStatement(sql);
-			
-			prep.setString(1, psycologist.getCpf());
-			prep.setString(2, psycologist.getNome());
-			prep.setString(3, psycologist.getRua());
-			prep.setString(4, psycologist.getCidade());
-			prep.setString(5, psycologist.getTelefone());
-			prep.setString(6, psycologist.getSalario());
-			prep.setString(7, psycologist.getCrp());
-			
-			prep.execute();
-			
-			createUser(psycologist);
-			
-			JOptionPane.showMessageDialog(null, "Psicólogo cadastrado com sucesso! Senha: 123456");
-		}catch(SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro ao cadastrar psicólogo!");
+	public boolean save(PsycologistModel psycologist) throws SQLException {
+		PsycologistModel existPsycologist = new PsycologistModel();
+				
+		existPsycologist = getPeople(psycologist.getCpf());
+		
+		if(existPsycologist == null) {
+			try {
+				String sql = "INSERT INTO psicologo"
+						+ " (CPF, NOME, RUA, CIDADE, TELEFONE, SALARIO, CRP)"
+						+ " VALUES (?, ?, ?, ?, ?, ?, ?);";
+				
+				PreparedStatement prep = connection.prepareStatement(sql);
+				
+				prep.setString(1, psycologist.getCpf());
+				prep.setString(2, psycologist.getNome());
+				prep.setString(3, psycologist.getRua());
+				prep.setString(4, psycologist.getCidade());
+				prep.setString(5, psycologist.getTelefone());
+				prep.setString(6, psycologist.getSalario());
+				prep.setString(7, psycologist.getCrp());
+				
+				prep.execute();
+				
+				createUser(psycologist);
+				
+				JOptionPane.showMessageDialog(null, "Psicólogo cadastrado com sucesso! Senha: 123456");
+				return true;
+			}catch(SQLException e) {
+				JOptionPane.showMessageDialog(null, "Erro ao cadastrar psicólogo!");
+				return false;
+			}			
+		}else {
+			JOptionPane.showMessageDialog(null, "Psicólogo informado já existe!");
+			return false;
 		}
 			
 	}

@@ -53,7 +53,7 @@ public class RegisterPeopleController {
 		SwingUtilities.updateComponentTreeUI(frame);
 	}
 	
-	public void buttonDefinition(Frame frame, int opt,int p1) { //P1 1-Paciente 2- Psicï¿½logo 3- Secretï¿½ria
+	public void buttonDefinition(Frame frame, int opt,int p1) { //P1 1-Paciente 3- Psicï¿½logo 2- Secretï¿½ria
 		registerPeopleView.setListener(new SelectButtonsListener() {
 			
 			@Override
@@ -64,7 +64,7 @@ public class RegisterPeopleController {
 								break;
 						case 3: modifyPsycologist();
 								break;
-						case 2:
+						case 2: modifySecretary();
 					}
 				}else { //se opt for 2 ï¿½ CADASTRAR
 					switch(p1) {
@@ -73,7 +73,6 @@ public class RegisterPeopleController {
 						case 3: registerPsycologist();
 								break;
 						case 2: registerSecretary();
-								break;
 					}
 				}
 				
@@ -94,7 +93,7 @@ public class RegisterPeopleController {
 			
 			@Override
 			public void search() {
-				searchPeople();
+				searchPeople(p1);
 			}
 		});
 	}
@@ -127,17 +126,31 @@ public class RegisterPeopleController {
 		patientModel.setDosagem2(registerPeopleView.getDosageField2().getText());
 	}
 	
+	public boolean verificationPatient() {
+		if(patientModel.getNome().equals("")) return false;
+		if(patientModel.getCpf().equals("")) return false;
+		if(patientModel.getRua().equals("")) return false;
+		if(patientModel.getCidade().equals("")) return false;
+		if(patientModel.getTelefone().equals("")) return false;
+		return true;
+	}
+	
 	public void registerPatient() {
 		patientModel = new PatientModel();
 		
 		getPatientFields();
 		
-		try {
-			patientDao.save(patientModel);
-			clearFields();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if(verificationPatient()) {
+			try {
+				if(patientDao.save(patientModel)) clearFields();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}else {
+			JOptionPane.showMessageDialog(null, "HÃ¡ algum campo em branco, favor preencher.");
 		}
+		
 
 		
 	}
@@ -158,8 +171,7 @@ public class RegisterPeopleController {
 		getPsycologistFields();
 		if(verificationPsycologist()) {
 			try {
-				psycologistDao.save(psycologistModel);
-				clearFields();
+				if(psycologistDao.save(psycologistModel)) clearFields();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -196,8 +208,7 @@ public class RegisterPeopleController {
 		getSecretaryFields();
 		if(verificationSecretary()) {
 			try {
-				secretaryDao.save(secretaryModel);
-				clearFields();
+				if(secretaryDao.save(secretaryModel)) clearFields();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -218,24 +229,25 @@ public class RegisterPeopleController {
 		return true;
 	}
 	
-	public void searchPeople() {
+	public void searchPeople(int p1) {
 		String cpf = registerPeopleView.getLocationField().getText();
 		
-		patientModel = patientDao.getPeople(cpf);
-		if(patientModel == null) {
-			psycologistModel = psycologistDao.getPeople(cpf);
-			if(psycologistModel == null) {
+		if(p1 == 1) {
+			patientModel = patientDao.getPeople(cpf);
+			if(patientModel != null) insertFields(patientModel);
+			else JOptionPane.showMessageDialog(null, "Paciente não encontrado.");
+		}else {	
+			if(p1 == 2 ) {
 				secretaryModel = secretaryDao.getPeople(cpf);
-				if(secretaryModel == null) {
-					JOptionPane.showMessageDialog(null, "CPF nï¿½o encontrado!");
-				}else {
-					insertFields(secretaryModel);
-				}
+				if(secretaryModel != null) insertFields(secretaryModel);
+				else JOptionPane.showMessageDialog(null, "Secretária não encontrada.");
 			}else {
-				insertFields(psycologistModel);
+				if(p1 == 3) {
+					psycologistModel = psycologistDao.getPeople(cpf);
+					if(psycologistModel != null) insertFields(psycologistModel);
+					else JOptionPane.showMessageDialog(null, "Psicólogo não encontrado.");
+				}
 			}
-		}else {
-			insertFields(patientModel);
 		}
 		
 	}
@@ -272,8 +284,7 @@ public class RegisterPeopleController {
 	}
 	
 	public void modifyPatient() {
-		getPatientFields();
-		
+		getPatientFields();	
 
 		try{
 			patientDao.update(patientModel);

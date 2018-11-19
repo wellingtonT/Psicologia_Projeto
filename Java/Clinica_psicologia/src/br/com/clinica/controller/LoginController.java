@@ -45,7 +45,6 @@ public class LoginController {
 	public LoginController(Frame frame) {
 		loginView = new LoginView();
 		userModel = new UserModel();
-		template = new Template(1);
 		this.frame = frame;
 		
 		loginView.setListener(new EnterButtonListener() {
@@ -56,18 +55,14 @@ public class LoginController {
 			}
 		});
 		
-		mudarConteudo(loginView, template);
+		mudarConteudo(loginView);
 	}
 	
-	public void mudarConteudo(Component conteudo, Component template) {
+	public void mudarConteudo(Component conteudo) {
 		frame.getConteudo().removeAll();
 		frame.getTemplate().removeAll();
-		
-		frame.getConteudo().add(conteudo);
-		frame.getTemplate().add(template); 
-		
+		frame.getConteudo().add(conteudo); 
 		frame.getConteudo().revalidate();
-		frame.getTemplate().revalidate();
 		
 		SwingUtilities.updateComponentTreeUI(frame);
 	}

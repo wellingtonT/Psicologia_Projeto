@@ -92,10 +92,6 @@ public class QueryDAO {
 				+ "AND hora_agendada = '" + time + "' "
 				+ "AND cpf_psicologo LIKE '" + cpf + "';";
 				
-		System.out.println("Data: " + date);
-		System.out.println("Hora: " + time);
-		System.out.println("cpf: " + cpf);
-		
 		java.sql.Statement statement;
 		try {
 			statement = connection.createStatement();
@@ -139,7 +135,7 @@ public class QueryDAO {
 				
 				
 				queryModel.setCpfPatient(resultSet.getString("cpf_paciente"));
-				queryModel.setCpfPsycologist(resultSet.getString("cpf_psicologo"));
+				queryModel.setNamePsycologist(resultSet.getString("cpf_psicologo"));
 				queryModel.setCpfSecretary(resultSet.getString("cpf_secretaria"));
 				queryModel.setDay("" + day);
 				queryModel.setMonth("" + month);
