@@ -51,6 +51,10 @@ public class SecretaryDAO {
 		
 	}
 	
+	public boolean delete(SecretaryModel secretary) {
+		return true;
+	}
+	
 	public void createUser(SecretaryModel secretary) {
 		try {
 			String sql = "INSERT INTO usuario "

@@ -74,6 +74,11 @@ public class RegisterQueryController {
 			public void cancel() {
 				initialController = new InitialController(frame);
 			}
+
+			@Override
+			public void delete() {
+				if(opt == 2) deleteQuery();
+			}
 		});
 		
 		registerQueryView.setListenerSearch(new SearchButtonListener() {
@@ -83,6 +88,10 @@ public class RegisterQueryController {
 				searchQuery();
 			}
 		});
+	}
+	
+	public void deleteQuery() {
+		
 	}
 	
 	public void clearFields() {

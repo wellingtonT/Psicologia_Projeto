@@ -66,7 +66,7 @@ public class RegisterQueryView extends JPanel {
 	private JButton saveButton = new JButton(imgSave);
 	
 	private JLabel locationCpfText = new JLabel("Digite o cpf do paciente: ");
-	private JTextField locationField = new JTextField(10);
+	private JTextField locationField = new JTextField(20);
 	private JButton locationButton = new JButton("Pesquisar");
 	
 	public RegisterQueryView(int opt) {
@@ -81,7 +81,7 @@ public class RegisterQueryView extends JPanel {
 		if(opt == 2) {			
 			gbc.gridx = 0;
 			gbc.gridy = 0;
-			gbc.weightx = 1.0;
+			gbc.weightx = 0.2;
 			gbc.insets = new Insets(1,10,1,1);
 			gbc.fill = GridBagConstraints.NONE;
 			gbc.anchor = GridBagConstraints.LINE_END;
@@ -89,12 +89,15 @@ public class RegisterQueryView extends JPanel {
 			this.add(locationCpfText, gbc);
 			
 			gbc.gridx = 1;
-			gbc.fill = GridBagConstraints.HORIZONTAL;
+			gbc.weightx = 0.5;
+			gbc.anchor = GridBagConstraints.LINE_START;
 			
+			locationField.setMinimumSize(new Dimension(200,20));
 			this.add(locationField, gbc);
 			
-			gbc.gridx = 2;
-			gbc.anchor = GridBagConstraints.LINE_START;
+			gbc.weightx = 0.3;
+			gbc.gridx = 1;
+			gbc.anchor = GridBagConstraints.CENTER;
 			gbc.fill = GridBagConstraints.NONE;
 			
 			addActionSearchButton();

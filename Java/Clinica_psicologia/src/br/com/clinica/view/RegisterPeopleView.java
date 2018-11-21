@@ -77,6 +77,9 @@ public class RegisterPeopleView extends JPanel{
 	
 	private ImageIcon imgSave = new ImageIcon(getClass().getResource(caminho + "Salvar.png"));
 	private JButton saveButton = new JButton(imgSave);
+	
+	private ImageIcon imgDelete = new ImageIcon(getClass().getResource(caminho + "Modificar_Pessoas.png"));
+	private JButton deleteButton = new JButton(imgDelete);
 
 	
 	public RegisterPeopleView(int tipo, int modelo) {
@@ -112,10 +115,13 @@ public class RegisterPeopleView extends JPanel{
 			this.add(locationCpfText, gbc);
 			
 			gbc.gridx = 1;
+			gbc.weightx = 0.5;
+			gbc.anchor = GridBagConstraints.LINE_START;
 			gbc.fill = GridBagConstraints.HORIZONTAL;
 			
 			this.add(locationField, gbc);
 			
+			gbc.weightx = 0.3;
 			gbc.gridx = 2;
 			gbc.anchor = GridBagConstraints.LINE_START;
 			gbc.fill = GridBagConstraints.NONE;
@@ -377,6 +383,14 @@ public class RegisterPeopleView extends JPanel{
 		addActionSaveButton();
 		panel.add(saveButton, gbc);
 		
+//		if(modelo == 1) {
+//			gbc.gridx = 3;
+//			
+//			redimensionarImagem(deleteButton, imgDelete);
+//			addActionDeleteButton();
+//			panel.add(deleteButton, gbc);
+//		}
+		
 	}
 
 	private void redimensionarImagem(JButton img1, ImageIcon img2) {
@@ -385,6 +399,16 @@ public class RegisterPeopleView extends JPanel{
 		img1.setMinimumSize(new Dimension(85,55));
 	}
 
+	public void addActionDeleteButton() {
+		deleteButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listener.delete();
+			}
+		});
+	}
+	
 	public void addActionClearButton() {
 		clearButton.addActionListener(new ActionListener() {
 			

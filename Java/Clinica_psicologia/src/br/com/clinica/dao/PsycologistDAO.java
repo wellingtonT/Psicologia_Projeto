@@ -114,6 +114,10 @@ public class PsycologistDAO {
 		
 	}
 	
+	public boolean delete(PsycologistModel psycologist) {
+		return true;
+	}
+	
 	public PsycologistModel getPeople(String cpf) {
 		PsycologistModel psycologistModel = new PsycologistModel();
 		

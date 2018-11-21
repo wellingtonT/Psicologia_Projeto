@@ -87,6 +87,13 @@ public class RegisterPeopleController {
 			public void cancel() {
 				initialController = new InitialController(frame);
 			}
+
+			@Override
+			public void delete() {
+				if(p1 == 3) deletePsycologist();
+				else if(p1 == 2) deleteSecretary();
+				
+			}
 		});
 		
 		registerPeopleView.setListenerSearch(new SearchButtonListener() {
@@ -96,6 +103,22 @@ public class RegisterPeopleController {
 				searchPeople(p1);
 			}
 		});
+	}
+	
+	public void deletePsycologist() {
+		getPsycologistFields();
+		
+		if(verificationPsycologist()) {
+			psycologistDao.delete(psycologistModel);
+		}
+	}
+	
+	public void deleteSecretary() {
+		getSecretaryFields();
+		
+		if(verificationSecretary()) {
+			secretaryDao.delete(secretaryModel);
+		}
 	}
 	
 	public void clearFields() {
@@ -150,8 +173,6 @@ public class RegisterPeopleController {
 		}else {
 			JOptionPane.showMessageDialog(null, "Há algum campo em branco, favor preencher.");
 		}
-		
-
 		
 	}
 	
