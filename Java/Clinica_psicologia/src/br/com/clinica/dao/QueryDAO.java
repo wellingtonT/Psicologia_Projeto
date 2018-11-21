@@ -77,11 +77,11 @@ public class QueryDAO {
 				JOptionPane.showMessageDialog(null, "Consulta cadastrada com sucesso!");
 				return true;
 			}else {
-				JOptionPane.showMessageDialog(null, "O horï¿½rio "+time+" , do psicï¿½logo " +query.getNamePsycologist()+" nï¿½o estï¿½ disponï¿½vel!");
+				JOptionPane.showMessageDialog(null, "O horário "+time+" , do psicólogo " +query.getNamePsycologist()+" não está disponível!");
 				return false;
 			}				
 		}else {
-			JOptionPane.showMessageDialog(null, "Paciente nï¿½o existe!");
+			JOptionPane.showMessageDialog(null, "Paciente não existe!");
 			return false;
 		}
 	}
@@ -168,7 +168,7 @@ public class QueryDAO {
 		switch(query.getMonth()) {
 			case "Janeiro": mes = 1; break;
 			case "Fevereiro": mes = 2; break;
-			case "Marï¿½o": mes = 3; break;
+			case "Março": mes = 3; break;
 			case "Abril": mes = 4; break;
 			case "Maio": mes = 5; break;
 			case "Junho": mes = 6; break;

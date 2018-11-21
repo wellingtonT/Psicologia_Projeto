@@ -41,7 +41,7 @@ public class ModifyView extends JPanel{
 	private JButton backButton = new JButton("Voltar");
 	
 	private JLabel rodape = new JLabel(" ");
-	private JLabel breadcrumb = new JLabel("Início > Moficiar Pessoas");
+//	private JLabel breadcrumb = new JLabel("Início > Moficiar Pessoas");
 	
 	public ModifyView(int opt) {
 		this.opt = opt;
@@ -51,14 +51,7 @@ public class ModifyView extends JPanel{
 	public void addComponents() {
 		this.setLayout(new GridBagLayout());
 		
-//		gbc.gridx = 0;
-//		gbc.gridy = 0;
-//		gbc.weightx = 1.0;
-//		gbc.gridwidth = 3;
-		gbc.insets = new Insets(1,10,1,1);
-//		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		
-		
+		gbc.insets = new Insets(1,10,1,1);		
 		gbc.gridwidth = 1;
 		gbc.gridy = 1;
 		gbc.gridx = 0;		

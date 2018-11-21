@@ -19,7 +19,7 @@ public class Frame extends JFrame {
 	public Frame() {
 		this.setSize(new Dimension(901,501));
 		this.setMinimumSize(new Dimension(900,500));
-		this.setTitle("Clï¿½nica Amaranto");
+		this.setTitle("Clínica Amaranto");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 
