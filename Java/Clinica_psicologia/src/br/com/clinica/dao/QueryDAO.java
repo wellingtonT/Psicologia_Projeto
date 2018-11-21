@@ -37,7 +37,7 @@ public class QueryDAO {
 			switch(query.getMonth()) {
 				case "Janeiro": mes = 1; break;
 				case "Fevereiro": mes = 2; break;
-				case "Marï¿½o": mes = 3; break;
+				case "Março": mes = 3; break;
 				case "Abril": mes = 4; break;
 				case "Maio": mes = 5; break;
 				case "Junho": mes = 6; break;
