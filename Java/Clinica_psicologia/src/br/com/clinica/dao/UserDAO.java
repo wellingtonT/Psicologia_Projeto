@@ -19,7 +19,6 @@ public class UserDAO {
 		String sql = "SELECT * FROM usuario " + 
 				"WHERE (cpf_psicologo LIKE '" + cpf +"' OR cpf_secretaria LIKE '" + cpf + "') AND senha = '" + password + "';";
 
-		
 		java.sql.Statement statement;
 		try {
 			statement = connection.createStatement();
@@ -68,8 +67,5 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 		return null;
-		
 	}
-	
-
 }

@@ -161,7 +161,6 @@ public class RegisterQueryController {
 		}else {
 			JOptionPane.showMessageDialog(null, "Há algum campo em branco, favor preencher.");
 		}
-		
 				
 	}
 	

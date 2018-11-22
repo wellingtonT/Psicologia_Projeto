@@ -61,8 +61,6 @@ public class InitialController {
 		
 		template.setUserName(nome);
 				
-		
-
 		mudarConteudo(initialView, template);
 		buttonDefinition(this.frame);
 	}

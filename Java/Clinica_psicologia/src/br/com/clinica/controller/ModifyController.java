@@ -19,7 +19,6 @@ public class ModifyController {
 	private InitialController initialController;
 	private RegisterPeopleController registerPeopleController;
 	
-	
 	public ModifyController(Frame frame, int opt) {
 		modifyView = new ModifyView(opt);
 		this.opt = opt;

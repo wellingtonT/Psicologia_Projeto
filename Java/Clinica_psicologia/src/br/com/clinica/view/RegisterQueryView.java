@@ -35,7 +35,7 @@ public class RegisterQueryView extends JPanel {
 	
 	private JLabel breadcrumb = new JLabel();
 	
-	private JLabel cpfText = new JLabel("CPF: ");
+	private JLabel cpfText = new JLabel("CPF Paciente: ");
 	private JTextField cpfField = new JTextField(20);	
 	
 	private JLabel psycologistText = new JLabel("Psicólogo: ");

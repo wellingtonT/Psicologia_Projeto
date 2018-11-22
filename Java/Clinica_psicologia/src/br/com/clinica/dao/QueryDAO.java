@@ -133,7 +133,6 @@ public class QueryDAO {
 				int month = calendar.get(GregorianCalendar.MONTH) + 1;
 				int year = calendar.get(GregorianCalendar.YEAR);
 				
-				
 				queryModel.setCpfPatient(resultSet.getString("cpf_paciente"));
 				queryModel.setNamePsycologist(resultSet.getString("cpf_psicologo"));
 				queryModel.setCpfSecretary(resultSet.getString("cpf_secretaria"));
@@ -145,12 +144,10 @@ public class QueryDAO {
 				return queryModel;
 			}
 			
-			
 		}catch(SQLException e) {
 
 		}
 		return null;
-		
 	}
 	
 	public void update(QueryModel query) {
@@ -158,7 +155,6 @@ public class QueryDAO {
 		try {
 			psycologistDao = new PsycologistDAO();
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		

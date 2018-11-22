@@ -48,7 +48,6 @@ public class SecretaryDAO {
 			JOptionPane.showMessageDialog(null, "Secretária já existe!");
 			return false;
 		}
-		
 	}
 	
 	public boolean delete(SecretaryModel secretary) {
@@ -98,9 +97,7 @@ public class SecretaryDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return null;
-		
 	}
 	
 	public boolean existSecretary(String cpf) throws SQLException {

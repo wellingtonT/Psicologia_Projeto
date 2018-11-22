@@ -53,7 +53,6 @@ public class PatientDAO {
 				+ " (NOME, DOSE, CPF_PACIENTE)"
 				+" VALUES (?, ?, ?);";
 		
-		
 		try {
 			PreparedStatement prep = connection.prepareStatement(sql);
 			
@@ -78,7 +77,6 @@ public class PatientDAO {
 	public void deleteMedication(PatientModel patient) {
 		String sql = "DELETE FROM medicamento "
 				+ "WHERE cpf_paciente = '" + patient.getCpf() + "';";
-		
 		
 		try {
 			PreparedStatement prep = connection.prepareStatement(sql);
@@ -141,7 +139,6 @@ public class PatientDAO {
 					patientModel.setMedicamento1(resultSet.getString("nome"));
 					patientModel.setDosagem1(resultSet.getString("dose"));
 					
-					
 				}else {
 					if(medicationExist(cpf) == 2) {
 						resultSet.next();
@@ -164,12 +161,9 @@ public class PatientDAO {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return null;
-		
 	}
 
 	
@@ -180,8 +174,6 @@ public class PatientDAO {
 				+ "cidade = '" + patient.getCidade() + "', "
 				+ "telefone = '" + patient.getTelefone() + "' "
 				+ "WHERE cpf = '" + patient.getCpf() + "';";
-		
-		
 		
 		try {
 			PreparedStatement prep = connection.prepareStatement(sql);
@@ -209,7 +201,6 @@ public class PatientDAO {
 			prep = connection.prepareStatement(sql);
 			prep.execute();
 			
-			
 			JOptionPane.showMessageDialog(null, "Paciente atualizado com sucesso!");
 		}catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Erro ao atualizar o paciente.");
@@ -222,7 +213,6 @@ public class PatientDAO {
 		
 		String sql = "SELECT * FROM medicamento "
 				+ "WHERE cpf_paciente LIKE '" + cpf + "';";
-		
 		
 		try {
 			java.sql.Statement statement = connection.createStatement();
@@ -237,7 +227,6 @@ public class PatientDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return lines;		
 	}
 	

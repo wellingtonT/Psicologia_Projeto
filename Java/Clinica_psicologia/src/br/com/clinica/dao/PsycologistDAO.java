@@ -109,9 +109,7 @@ public class PsycologistDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return null;
-		
 	}
 	
 	public boolean delete(PsycologistModel psycologist) {
@@ -123,8 +121,6 @@ public class PsycologistDAO {
 		
 		String sql = "SELECT * FROM psicologo "
 				+ "WHERE cpf LIKE '" + cpf + "';";
-		
-		
 		
 		try {
 			java.sql.Statement statement = connection.createStatement();
@@ -151,9 +147,7 @@ public class PsycologistDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return null;
-		
 	}
 	
 	public String[] getAllPsycologistsName() {
@@ -162,7 +156,6 @@ public class PsycologistDAO {
 		int i = 0;
 		
 		String sql = "SELECT * FROM psicologo WHERE nome <> 'Gerente'";
-		
 				
 		try {
 			java.sql.Statement statement = connection.createStatement();
@@ -179,7 +172,6 @@ public class PsycologistDAO {
 				names[i] = string;
 				i++;
 			}
-			
 			
 			return names;
 		} catch (SQLException e) {
