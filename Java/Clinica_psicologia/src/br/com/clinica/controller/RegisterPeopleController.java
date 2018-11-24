@@ -1,6 +1,8 @@
 package br.com.clinica.controller;
 
 import java.awt.Component;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
@@ -47,6 +49,7 @@ public class RegisterPeopleController {
 	}
 	
 	public void mudarConteudo(Component conteudo) {
+		
 		frame.getConteudo().removeAll();
 		frame.getConteudo().add(conteudo);
 		frame.getConteudo().revalidate();
@@ -256,17 +259,17 @@ public class RegisterPeopleController {
 		if(p1 == 1) {
 			patientModel = patientDao.getPeople(cpf);
 			if(patientModel != null) insertFields(patientModel);
-			else JOptionPane.showMessageDialog(null, "Paciente não encontrado.");
+			else JOptionPane.showMessageDialog(null, "Paciente nï¿½o encontrado.");
 		}else {	
 			if(p1 == 2 ) {
 				secretaryModel = secretaryDao.getPeople(cpf);
 				if(secretaryModel != null) insertFields(secretaryModel);
-				else JOptionPane.showMessageDialog(null, "Secretária não encontrada.");
+				else JOptionPane.showMessageDialog(null, "Secretï¿½ria nï¿½o encontrada.");
 			}else {
 				if(p1 == 3) {
 					psycologistModel = psycologistDao.getPeople(cpf);
 					if(psycologistModel != null) insertFields(psycologistModel);
-					else JOptionPane.showMessageDialog(null, "Psicólogo não encontrado.");
+					else JOptionPane.showMessageDialog(null, "Psicï¿½logo nï¿½o encontrado.");
 				}
 			}
 		}

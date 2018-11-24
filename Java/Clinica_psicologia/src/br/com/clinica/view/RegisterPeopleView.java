@@ -63,7 +63,7 @@ public class RegisterPeopleView extends JPanel{
 	private JTextField dosageField1 = new JTextField(10);
 	private JTextField dosageField2 = new JTextField(10);
 	
-	private JLabel salaryText = new JLabel("Salário: ");
+	private JLabel salaryText = new JLabel("Salï¿½rio: ");
 	private JTextField salaryField = new JTextField(6);
 	
 	private JLabel crpText = new JLabel("CRP: ");
@@ -219,7 +219,7 @@ public class RegisterPeopleView extends JPanel{
 	}
 	
 	public void addComponentsAddressData(JPanel panel) {
-		panel.setBorder(BorderFactory.createTitledBorder("Endereço"));
+		panel.setBorder(BorderFactory.createTitledBorder("Endereï¿½o"));
 		
 		panel.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();

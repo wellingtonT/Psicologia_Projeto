@@ -19,7 +19,7 @@ public class Frame extends JFrame {
 	public Frame() {
 		this.setSize(new Dimension(901,501));
 		this.setMinimumSize(new Dimension(900,500));
-		this.setTitle("Clínica Amaranto");
+		this.setTitle("ClÃ­nica Amaranto");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 
@@ -38,7 +38,6 @@ public class Frame extends JFrame {
 		
 		content.add(template, BorderLayout.NORTH);
 		content.add(conteudo, BorderLayout.CENTER);
-		
 	}
 	
 	public void setTemplate(JPanel t) {
